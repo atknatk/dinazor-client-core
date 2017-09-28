@@ -1,5 +1,5 @@
 /**
- * @dinazor/core v"1.0.81" (http://git.klcyazilim.com/dinazor-client-libs/dn-core)
+ * @dinazor/core v"1.0.85" (http://git.klcyazilim.com/dinazor-client-libs/dn-core)
  * Copyright 2017
  * Licensed under MIT
  */
@@ -73160,7 +73160,87 @@ function throttleable(duration, options) {
     };
 }
 
+// EXTERNAL MODULE: ./src/utils/copy.ts
+var copy = __webpack_require__("./src/utils/copy.ts");
+
+// CONCATENATED MODULE: ./src/utils/dictionary/dictionary.ts
+var Dictionary = /** @class */ (function () {
+    function Dictionary(init) {
+        this._keys = [];
+        this._values = [];
+        if (init) {
+            for (var x = 0; x < init.length; x++) {
+                this[init[x].key] = init[x].value;
+                this._keys.push(init[x].key);
+                this._values.push(init[x].value);
+            }
+        }
+    }
+    Dictionary.prototype.add = function (key, value) {
+        this[key] = value;
+        this._keys.push(key);
+        this._values.push(value);
+    };
+    Dictionary.prototype.addOrUpdate = function (key, value) {
+        var index = this._keys.indexOf(key, 0);
+        if (index === -1) {
+            this.add(key, value);
+        }
+        else {
+            this[key] = value;
+            this._values[index] = value;
+        }
+    };
+    Dictionary.prototype.get = function (key) {
+        var index = this._keys.indexOf(key, 0);
+        return this._values[index];
+    };
+    Dictionary.prototype.remove = function (key) {
+        var index = this._keys.indexOf(key, 0);
+        this._keys.splice(index, 1);
+        this._values.splice(index, 1);
+        delete this[key];
+    };
+    Dictionary.prototype.keys = function () {
+        return this._keys;
+    };
+    Dictionary.prototype.values = function () {
+        return this._values;
+    };
+    Dictionary.prototype.containsKey = function (key) {
+        if (typeof this[key] === 'undefined') {
+            return false;
+        }
+        return true;
+    };
+    Dictionary.prototype.toLookup = function () {
+        return this;
+    };
+    Dictionary.prototype.getUsableKey = function () {
+        this._keys.forEach(function (key) {
+            for (var index = 1; index < Number.MAX_VALUE; index++) {
+                if (isNaN(Number(key))) {
+                    return null;
+                }
+                if (+key != index) {
+                    return index;
+                }
+                else {
+                    break;
+                }
+            }
+        });
+    };
+    return Dictionary;
+}());
+
+
+// CONCATENATED MODULE: ./src/utils/dictionary/index.ts
+
+
 // CONCATENATED MODULE: ./src/utils/index.ts
+
+
 
 
 
@@ -73246,7 +73326,6 @@ var DnKeyValueBase = /** @class */ (function () {
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnCrudComponent", function() { return dn_crud_component["a" /* DnCrudComponent */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnCrudModule", function() { return dn_crud_module_DnCrudModule; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnDatatableComponent", function() { return dn_datatable_component["a" /* DnDatatableComponent */]; });
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnDatatableBase", function() { return dn_datatable_base["a" /* DnDatatableBase */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnDatatableModule", function() { return dn_datatable_module_DnDatatableModule; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnDatatableColumnBase", function() { return dn_datatable_column_base["a" /* DnDatatableColumnBase */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnDynamicFormComponent", function() { return dn_dynamic_form_component["a" /* DnDynamicFormComponent */]; });
@@ -73271,6 +73350,7 @@ var DnKeyValueBase = /** @class */ (function () {
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "JquiTabs", function() { return jqui_tabs_directive["a" /* JquiTabs */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "JqueryUiModule", function() { return jquery_ui_module_JqueryUiModule; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnCrudDatatableComponent", function() { return dn_crud_datatable_component_DnCrudDatatableComponent; });
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnDatatableBase", function() { return dn_datatable_base["a" /* DnDatatableBase */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnDynamicFormWidgetComponent", function() { return dn_dynamic_form_widget_component_DnDynamicFormWidgetComponent; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnQuestionBase", function() { return dn_question_base["a" /* DnQuestionBase */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnQuestionControlService", function() { return dn_question_control_service["a" /* DnQuestionControlService */]; });
@@ -73347,8 +73427,10 @@ var DnKeyValueBase = /** @class */ (function () {
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "throttleable", function() { return throttleable; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "noop", function() { return common["a" /* noop */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "Guid", function() { return guid["a" /* Guid */]; });
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "deepCopy", function() { return copy["a" /* deepCopy */]; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "PlacementTypes", function() { return PlacementTypes; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "PositionHelper", function() { return position_PositionHelper; });
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "Dictionary", function() { return Dictionary; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnResultBase", function() { return DnResultBase; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnResultDataBase", function() { return DnResultDataBase; });
 /* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "DnKeyValueBase", function() { return DnKeyValueBase; });
@@ -74412,6 +74494,19 @@ function isString(x) {
 var noop = function () {
 };
 
+
+/***/ }),
+
+/***/ "./src/utils/copy.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["a"] = deepCopy;
+function deepCopy(obj) {
+    return $.extend(true, {}, obj);
+}
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
