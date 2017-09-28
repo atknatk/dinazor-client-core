@@ -4,14 +4,12 @@ import { DnHttpService } from './http.service';
 import { DnNotificationService } from './notification.service';
 import { DnStorageService } from './storage.service';
 import { InjectionService } from './injection.service';
-import { DnRouterServiceModue } from './router/router-service.modue';
 /**
  * Exported Modules
  * @type {Array}
  */
 var modules = [
     HttpModule,
-    DnRouterServiceModue
 ];
 var DnServiceModule = /** @class */ (function () {
     function DnServiceModule() {

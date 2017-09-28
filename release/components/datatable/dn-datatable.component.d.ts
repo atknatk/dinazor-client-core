@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, ElementRef, EventEmitter, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import 'datatables.net-bs';
+import 'datatables.net-buttons-bs';
 import { DnStorageService } from '../../services/storage.service';
 import { DnDatatableBase } from './dn-datatable.base';
 export declare class DnDatatableComponent implements OnInit {

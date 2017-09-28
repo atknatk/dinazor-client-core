@@ -9,16 +9,15 @@ import { config } from '../../dinazor.config';
 @Injectable()
 export class DnAuthGuard implements CanActivate {
 
-    constructor(private router: Router,
-                private dnStorageService: DnStorageService) {
+    constructor(private dnStorageService: DnStorageService) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.dnStorageService.getItem(config.DINAZOR_USER_KEY)) {
             return true;
         }
-
-        this.router.navigate(['/auth/login'], {queryParams: {returnUrl: state.url}});
+        console.log('Yetkisiz işlem callback çağır');
+        // this.router.navigate(['/auth/login'], {queryParams: {returnUrl: state.url}});
         return false;
     }
 }

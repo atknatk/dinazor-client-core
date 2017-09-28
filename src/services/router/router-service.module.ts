@@ -8,9 +8,10 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { DnCanDeactivateGuard } from './can-deactivate-guard.service';
 import { DnSelectivePreloadingStrategy } from './selective-preloading-strategy';
+import { Router, RouterModule } from '@angular/router';
 
 const modules = [
-    HttpModule,
+    HttpModule
 ];
 
 @NgModule({
@@ -22,5 +23,5 @@ const modules = [
     exports: [...modules],
     imports: [...modules]
 })
-export class DnRouterServiceModue {
+export class DnRouterServiceModule {
 }

@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 // import 'datatables.net/js/jquery.dataTables';
 // import '@dinazor/plugins/datatables-bundle/datatable-custom-ui';
 import 'datatables.net-bs';
+import 'datatables.net-buttons-bs';
 import { config } from '../../dinazor.config';
 import { DnStorageService } from '../../services/storage.service';
 import { isNullOrUndefined } from '../../utils/check';

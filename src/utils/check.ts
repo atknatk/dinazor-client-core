@@ -1,8 +1,19 @@
 /**
- * Verilen deger null ya da undefined ise true doner
+ * Created by cabbar on 13.05.2017.
  */
-export function isNullOrUndefined<T>(value: T | null | undefined): value is null | undefined {
-    return value === null || value === undefined;
+export function isNullOrUndefined(obj): boolean {
+    if (obj == null) {
+        return true;
+    }
+
+    if (obj === null) {
+        return true;
+    }
+
+    if (typeof obj === 'undefined') {
+        return true;
+    }
+    return false;
 }
 
 export function isNullOrUndefinedOrEmpty(obj): boolean {
@@ -11,6 +22,17 @@ export function isNullOrUndefinedOrEmpty(obj): boolean {
     }
 
     if (obj === '') {
+        return true;
+    }
+    return false;
+}
+
+export function isNullOrUndefinedOrNaN(obj): boolean {
+    if (isNullOrUndefined(obj)) {
+        return true;
+    }
+
+    if (isNaN(obj)) {
         return true;
     }
     return false;

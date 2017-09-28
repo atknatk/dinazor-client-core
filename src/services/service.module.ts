@@ -6,7 +6,7 @@ import { DnHttpService } from './http.service';
 import { DnNotificationService } from './notification.service';
 import { DnStorageService } from './storage.service';
 import { InjectionService } from './injection.service';
-import { DnRouterServiceModue } from './router/router-service.modue';
+import { DnRouterServiceModule } from './router/router-service.module';
 
 /**
  * Exported Modules
@@ -14,7 +14,7 @@ import { DnRouterServiceModue } from './router/router-service.modue';
  */
 const modules = [
     HttpModule,
-    DnRouterServiceModue
+    // DnRouterServiceModule
 ];
 
 @NgModule({

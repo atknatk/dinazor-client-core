@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { BsDropdownModule, TooltipModule } from 'ngx-bootstrap';
 import { DnHttpService } from '../services/http.service';
 import { DnNotificationService } from '../services/notification.service';
@@ -11,11 +10,9 @@ import { DnFooterComponent } from './footer/footer.component';
 import { HeaderModule } from './header/header.module';
 import { LayoutService } from './layout.service';
 import { RibbonComponent } from './ribbon/ribbon.component';
-import { RouteBreadcrumbsComponent } from './ribbon/route-breadcrumbs.component';
 var components = [
     DnFooterComponent,
     RibbonComponent,
-    RouteBreadcrumbsComponent
 ];
 var DinazorLayoutModule = /** @class */ (function () {
     function DinazorLayoutModule() {
@@ -26,7 +23,6 @@ var DinazorLayoutModule = /** @class */ (function () {
                         CommonModule,
                         HeaderModule,
                         FormsModule,
-                        RouterTestingModule,
                         TooltipModule.forRoot(),
                         BsDropdownModule.forRoot(),
                     ],

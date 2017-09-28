@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Guid } from '../../utils/guid';
 
 declare let $: any;

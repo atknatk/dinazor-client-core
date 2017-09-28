@@ -103,7 +103,7 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
     initMask() {
         let ths = this;
         this.extendMask();
-        const onincomplete = function() {
+        const onincomplete = function () {
             if (ths && ths.form || isNullOrUndefined(ths.formControlName)) return;
             ths.form.controls[ths.formControlName].patchValue(null);
             ths.value = null;

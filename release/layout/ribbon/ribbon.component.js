@@ -4,8 +4,6 @@ var RibbonComponent = /** @class */ (function () {
     function RibbonComponent(layoutService) {
         this.layoutService = layoutService;
     }
-    RibbonComponent.prototype.ngOnInit = function () {
-    };
     RibbonComponent.prototype.resetWidgets = function () {
         this.layoutService.factoryReset();
     };

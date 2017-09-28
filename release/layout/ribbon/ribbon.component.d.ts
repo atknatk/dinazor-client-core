@@ -1,8 +1,6 @@
-import { OnInit } from '@angular/core';
 import { LayoutService } from '../layout.service';
-export declare class RibbonComponent implements OnInit {
+export declare class RibbonComponent {
     private layoutService;
     constructor(layoutService: LayoutService);
-    ngOnInit(): void;
     resetWidgets(): void;
 }
