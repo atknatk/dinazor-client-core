@@ -1,0 +1,42 @@
+<form novalidate="novalidate" class="form-horizontal" (ngSubmit)="onSubmit()" [formGroup]="form" id="{{formBase.id}}">
+  <fieldset>
+    <div *ngFor="let question of formBase.questionRows;let qi = index" [ngSwitch]="question.type">
+
+      <legend *ngSwitchCase="'legend'" class="dn-gray-legend">
+        {{question.title}}
+      </legend>
+      <div *ngSwitchCase="''" class="form-row form-group {{question.rowClass}}">
+        <div class="col-sm-12 col-md-{{qRow.rowSize}} dn-row" *ngFor="let qRow of question.row;let i = index">
+          <dn-df-question [question]="qRow.question" [form]="form"
+                          (changeSelectEvent)="changeSelectEventEmit($event)"></dn-df-question>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-actions {{formBase.submitContainerClass}}" [dnStyle]="formBase.submitContainerStyle">
+    <div class="row">
+      <div class="col-md-12">
+        <button *ngFor="let formButton of formBase.formButtonList;" class="btn {{formButton.submitButtonClass}}"
+                type="button" (click)="formButton.submitButtonEvent({event: $event,form :form})"
+                [disabled]="formButton.disabled === undefined ? false : formButton.disabled(form)">
+          <i class="{{formButton.icon}}"></i>
+          {{formButton.label}}
+        </button>
+        <button class="btn btn-default" type="reset" (click)="clearForm()">
+          <i class="fa fa-eraser"></i>
+          Temizle
+        </button>
+        <button class="btn" type="submit" [disabled]="!form.valid">
+          <i class="fa fa-save"></i>
+          {{formBase.submitButtonLabel}}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--<style type="text/css">-->
+<!--.has-feedback .form-control-feedback {-->
+<!--top: 8px;-->
+<!--}-->
+<!--</style>-->

@@ -1,0 +1,47 @@
+<fieldset [formGroup]="form">
+  <div class="form-group">
+    <label [attr.for]="question.key" class="control-label col-md-{{question.columnLabelSize}}"
+           [innerHTML]="getLabel()"></label>
+    <div [ngSwitch]="question.controlType" class="col-md-{{question.columnQuestionSize}}">
+
+      <input #input
+             *ngSwitchCase="'textbox'"
+             [formControlName]="question.key"
+             [id]="question.id || question.key"
+             [type]="question.type"
+             class="form-control"
+             name="{{question.key}}"
+             [ngClass]="getClass()"/>
+
+      <select [id]="question.key" *ngSwitchCase="'dropdown'"
+              [formControlName]="question.key"
+              class="form-control"
+              name="{{question.key}}">
+        <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+      </select>
+
+      <dn-select2 *ngSwitchCase="'select2'"
+                  css="form-control input-sm {{getClass()}}"
+                  placeholder="Seçiniz.."
+                  formControlName="{{question.key}}"
+                  [dataSourceProvider]="listItems"
+                  [dnSelect2ItemAdapter]="entityToIqSelect2Item"
+                  referenceMode='{{question.referenceMode}}'
+                  [multiple]='false'
+                  (onSelect)="onSelect($event)"
+                  [minimumInputLength]='0'
+                  (onRemove)="onRemove($event)" [selectedProvider]="getItems"
+                  [ngClass]="getClass()"
+                  name="{{question.key}}"
+                  [displaySelect]="question.displaySelect"
+                  [selectedText]="question.selectedText"></dn-select2>
+
+      <!--<dn-datepicker *ngSwitchCase="'datepicker'"-->
+      <!--[id]="question.id || question.key"-->
+      <!--formControlName="{{question.key}}"-->
+      <!--class="form-control"-->
+      <!--name="{{question.key}}"></dn-datepicker>-->
+      <!--<small [hidden]="isHide" class="text-danger">Email</small>-->
+    </div>
+  </div>
+</fieldset>

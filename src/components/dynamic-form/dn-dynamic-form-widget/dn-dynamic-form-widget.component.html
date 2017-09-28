@@ -1,0 +1,24 @@
+<div id="content">
+  <div class="row">
+    <div class="{{dnWidget.column}}">
+
+
+      <!-- Widget ID (each widget will need unique ID)-->
+      <dn-widget [colorbutton]="false" [editbutton]="false" id="{{dnWidget.id}}">
+
+        <header>
+          <span class="widget-icon"> </span>
+          <h2>{{dnWidget.title}}</h2>
+
+        </header>
+        <div>
+          <div class="widget-body">
+            <dn-dynamic-form [formBase]="dnWidget.formBase"  (payLoadData)="onSubmit($event)"></dn-dynamic-form>
+          </div>
+        </div>
+      </dn-widget>
+    </div>
+  </div>
+</div>
+
+

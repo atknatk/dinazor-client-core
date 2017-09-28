@@ -1,0 +1,30 @@
+{
+  "/api": {
+    "target": "http://192.168.1.18:5001/api",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  },
+  "/dinazor": {
+    "target": "http://localhost:5101/dinazor",
+    "secure": false,
+    "pathRewrite": {
+      "^/dinazor": ""
+    }
+  },
+  "/tcmb": {
+    "target": "http://www.tcmb.gov.tr/kurlar",
+    "secure": false,
+    "pathRewrite": {
+      "^/tcmb": ""
+    }
+  },
+  "/report": {
+    "target": "http://192.168.1.18:8080/jasperserver/rest_v2/reports/reports",
+    "secure": false,
+    "pathRewrite": {
+      "^/report": ""
+    }
+  }
+}

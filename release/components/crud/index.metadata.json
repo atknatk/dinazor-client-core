@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":3,"metadata":{},"exports":[{"from":"./dn-crud-base"},{"from":"./dn-crud.component"},{"from":"./dn-crud.module"},{"from":"./dn-crud-datatable"}]},{"__symbolic":"module","version":1,"metadata":{},"exports":[{"from":"./dn-crud-base"},{"from":"./dn-crud.component"},{"from":"./dn-crud.module"},{"from":"./dn-crud-datatable"}]}]

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../build/components/loading/dn-loading.base.ts"],"names":[],"mappings":"AAAA;IAAA;QACc,YAAO,GAAG,KAAK,CAAC;IAS9B,CAAC;IAPa,sCAAc,GAAxB;QACI,qBAAqB;QACrB,MAAM,CAAC;YACH,iBAAiB;YACjB,OAAO,EAAE,SAAS;SACrB,CAAC;IACN,CAAC;IACL,oBAAC;AAAD,CAVA,AAUC,IAAA","file":"dn-loading.base.js","sourceRoot":""}

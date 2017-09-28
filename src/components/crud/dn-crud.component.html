@@ -1,0 +1,59 @@
+<dn-widgets-grid>
+    <div class="row">
+        <article id="dn-edit-widget" class="col-sm-6" style="display: none;">
+
+            <dn-widget [searchbutton]="true" color="blueDark">
+                <header>
+                    <div class="jarviswidget-ctrls" role="menu">
+                        <a (click)="closeEditPanel()" class="button-icon" rel="tooltip" title="Kapat"
+                           data-placement="bottom">
+                            <i class="fa fa-times"></i></a>
+                    </div>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>{{crudData.title}}</h2>
+                </header>
+                <div *ngIf="crudData.editForm !=null">
+                    <div class="widget-body dn-edit-widget-body">
+                        <dn-dynamic-form [formBase]="crudData.editForm" (payLoadData)="onSubmit($event,'edit',isEdit)"
+                                         [formData]="editFormData"></dn-dynamic-form>
+                    </div>
+                </div>
+            </dn-widget>
+
+        </article>
+        <article id="dn-table-widget" class="col-sm-12">
+            <dn-widget color="blueDark" [widgetId]="crudData.datatableOptions">
+                <header>
+                    <div class="jarviswidget-ctrls" role="menu">
+                        <a *ngIf="crudData.editForm !=null" (click)="openNewDataPanel()" class="button-icon"
+                           rel="tooltip"
+                           title="Yeni Kayıt" data-placement="bottom"><i
+                                class="fa fa-plus"></i></a>
+                        <a (click)="showPanel()" class="button-icon" rel="tooltip" title="Ara"
+                           data-placement="bottom"><i
+                                class="fa fa-search"></i></a>
+                    </div>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>{{crudData.title}}</h2>
+                </header>
+                <div>
+                    <div class="widget-body no-padding dn-datatable-widget-body">
+
+                        <div class="dinazor-height-animation dn-search-body" style="display: none">
+                            <dn-dynamic-form [formBase]="crudData.searchForm"
+                                             (payLoadData)="onSubmit($event,'search')"></dn-dynamic-form>
+                        </div>
+                        <dn-datatable [dnDatatableBase]="crudData.datatableOptions"
+                                      paginationLength="true"
+                                      [editButton]="crudData.datatableOptions.editButton && auth.isAuthorized([crudData.datatableOptions.editRole])"
+                                      [deleteButton]="crudData.datatableOptions.deleteButton && auth.isAuthorized([crudData.datatableOptions.deleteRole])"
+                                      tableClass="table table-striped table-bordered table-hover"
+                                      (actionEditEmitter)="actionEdit($event)"
+                                      (actionDeleteEmitter)="actionDelete($event)">
+                        </dn-datatable>
+                    </div>
+                </div>
+            </dn-widget>
+        </article>
+    </div>
+</dn-widgets-grid>

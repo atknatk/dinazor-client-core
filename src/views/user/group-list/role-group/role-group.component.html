@@ -1,0 +1,105 @@
+<div class="row">
+  <!-- NEW WIDGET START -->
+  <article class="col-sm-12">
+    <!-- Widget ID (each widget will need unique ID)-->
+    <dn-widget class="well" id="role-group-widget">
+      <!-- widget div-->
+      <div>
+        <!-- widget content -->
+        <div class="widget-body">
+          <div class="row">
+            <div class="col-sm-6 col-lg-6">
+              <h6>Rol Grubu Listesi</h6>
+              <div class="row">
+                <div class="col-sm-6 col-lg-6" *ngIf="auth.isAuthorized([dinazorRoles.RoleGroupSave])">
+                  <div class="input-group wall-comment-reply">
+                    <input #rolegrubuterm (keypress)="saveRoleGrubuKeypress($event)" class="form-control"
+                           placeholder="Rol Grubu Ekle" type="text">
+                    <span class="input-group-btn">
+															<button class="btn btn-success" (click)="saveRoleGrubu()">
+                                <i class="fa fa-plus"></i> Ekle
+                              </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                  <div class="input-group wall-comment-reply">
+                    <input #rolegrubusearchterm class="form-control" (keypress)="roleGrubuSearchKeypress($event)"
+                           placeholder="Rol Grubu Ara" type="text">
+                    <span class="input-group-btn">
+															<button class="btn btn-primary" (click)="searchRoleGrubu()">
+                                <i class="fa fa-search"></i> Ara
+                                </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <table class="table table-striped table-bordered table-hover  ">
+                <tr *ngFor="let grup of roleGrubuFilteredList; let i = index"
+                    [class.active]="i == roleGrubuSelectedRow">
+                  <td style="width: 90px">
+                    <button *ngIf="auth.isAuthorized([dinazorRoles.RoleGroupUpdate])" type="button"
+                            class="btn btn-xs btn-primary txt-color-white" (click)="editRoleGrubu(grup)">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button *ngIf="auth.isAuthorized([dinazorRoles.RoleGroupDelete])"
+                            type="button" class="btn btn-xs btn-danger txt-color-white" (click)="removeRoleGrubu(grup)"
+                            style="margin-left: 5px;">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                  </td>
+                  <td (click)="setClickedRoleGrubuRow(i)">{{grup.name}}</td>
+                </tr>
+              </table>
+            </div>
+            <div *ngIf="roleGrubuSelectedRow >-1" class="col-sm-6 col-lg-6">
+              <dn-loading [show]="roleAtamaLoading">
+                <h6>Rol Atama</h6>
+                <div class="row" style="margin-left: -26px;margin-right: -26px;">
+                  <div class="col-sm-12 col-lg-12">
+                    <div class="wall-comment-reply">
+                      <form class="smart-form">
+                        <dn-select2-smart #roleselect [hasLabel]="false" col="12" serviceUrl="role"
+                                          [displaySelect]="undefined"
+                                          [selectedText]="undefined"
+                                          (onSelect)="onSelectRole($event)"></dn-select2-smart>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <table class="table table-striped table-bordered table-hover" style="margin-top: -13px">
+                  <tr *ngFor="let grup of roleListesi">
+                    <td style="width: 45px">
+                      <button type="button" class="btn btn-xs btn-danger txt-color-white"
+                              (click)="removeRoleFromGroup(grup)" style="margin-left: 5px;">
+                        <i class="fa fa-trash-o"></i>
+                      </button>
+                    </td>
+                    <td>{{grup.name}}</td>
+                  </tr>
+                </table>
+              </dn-loading>
+            </div>
+          </div>
+        </div>
+        <!-- end widget content -->
+      </div>
+      <!-- end widget div -->
+    </dn-widget>
+    <!-- end widget -->
+  </article>
+  <!-- WIDGET END -->
+</div>
+
+
+<div id="role-grup-dialog">
+  <div class="wall-comment-reply">
+    <form class="smart-form" [formGroup]="roleGrubuEditForm">
+      <fieldset>
+        <dn-smart-input col="12" [form]="roleGrubuEditForm" formControlName="name">Rol Grubu Adı</dn-smart-input>
+      </fieldset>
+    </form>
+  </div>
+</div>

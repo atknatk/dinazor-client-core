@@ -1,0 +1,38 @@
+<dn-loading-content [show]="loading">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <dn-widget>
+        <header>
+                    <span class="widget-icon">
+                        <i class="glyphicon glyphicon-file txt-color-darken"></i> </span>
+          <h2>Kullanıcı ve Yetki İşlemleri</h2>
+          <ul class="nav nav-tabs pull-right in" id="myTab">
+            <li *ngIf="isUserAuth()"
+                class="active">
+              <a data-toggle="tab" href="#s1"><i class="fa fa-list-alt"></i> <span
+                class="hidden-mobile hidden-tablet">Kullanıcı</span></a>
+            </li>
+            <li *ngIf="isUserRoleAuth()">
+              <a data-toggle="tab" href="#s2"><i class="fa fa-list-ol"></i> <span
+                class="hidden-mobile hidden-tablet">Kullanıcı ve Role Grubu</span></a>
+            </li>
+          </ul>
+        </header>
+
+        <div class="no-padding">
+          <div class="widget-body">
+            <div id="userTabContent" class="tab-content">
+              <dn-user-list *ngIf="isUserAuth()"
+                         (actionChangeUser)="changeUser()" class="tab-pane fade active in" id="s1"></dn-user-list>
+              <dn-group-list *ngIf="isUserRoleAuth()" #dngrouplist class="tab-pane fade " id="s2"></dn-group-list>
+            </div>
+          </div>
+        </div>
+      </dn-widget>
+    </div>
+  </div>
+</dn-loading-content>
+
+<!--
+<pre>{{dbForm.getRawValue() | json}}</pre>
+-->

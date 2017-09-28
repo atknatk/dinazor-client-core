@@ -1,0 +1,14 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <dn-widgets-grid>
+        <dn-user-group-list #usergrouplist
+                            *ngIf="auth.isAuthorized([dinazorRoles.UserGroupView,dinazorRoles.UserGroupUpdate,
+                        dinazorRoles.UserGroupSave,dinazorRoles.UserGroupDelete])"></dn-user-group-list>
+        <br>
+        <dn-role-group-list
+                *ngIf="auth.isAuthorized([dinazorRoles.RoleGroupView,dinazorRoles.RoleGroupSave,
+                dinazorRoles.RoleGroupUpdate,dinazorRoles.RoleGroupDelete])"
+                (roleGroupChange)="roleGroupChange()"></dn-role-group-list>
+    </dn-widgets-grid>
+</div>

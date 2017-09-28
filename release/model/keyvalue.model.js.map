@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../build/model/keyvalue.model.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH;IAII,wBAAY,OAGN;QAHM,wBAAA,EAAA,YAGN;QACF,IAAI,CAAC,GAAG,GAAG,OAAO,CAAC,GAAG,CAAC;QACvB,IAAI,CAAC,KAAK,GAAG,OAAO,CAAC,KAAK,IAAI,EAAE,CAAC;IACrC,CAAC;IACL,qBAAC;AAAD,CAXA,AAWC,IAAA","file":"keyvalue.model.js","sourceRoot":""}
