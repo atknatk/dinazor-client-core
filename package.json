@@ -1,6 +1,6 @@
 {
   "name": "@dinazor/core",
-  "version": "1.0.91",
+  "version": "1.0.97",
   "description": "@dinazor/core is a Angular2+ component core library.",
   "main": "release/index.js",
   "typings": "release/index.d.ts",

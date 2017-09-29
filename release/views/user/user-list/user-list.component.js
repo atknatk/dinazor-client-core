@@ -21,7 +21,7 @@ import { DnQuestionDifferentValidator } from '../../../components/dynamic-form/d
 import { DnQuestionIdenticalValidator } from '../../../components/dynamic-form/dn-question-validator/dn-question-identical-validator';
 import { DnDatatableBase } from '../../../components/datatable/dn-datatable.base';
 import { DnDatatableColumnBase } from '../../../components/datatable/dn-datatable-column.base';
-import { dinazorRoles } from '../../auth/dinazor-roles';
+import { dinazorRoles } from '../../../dinazor-role-enum';
 var DnUserListComponent = /** @class */ (function (_super) {
     __extends(DnUserListComponent, _super);
     function DnUserListComponent() {

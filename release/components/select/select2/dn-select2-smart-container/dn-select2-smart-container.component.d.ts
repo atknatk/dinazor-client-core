@@ -16,6 +16,7 @@ export declare class DnSelect2SmartContainerComponent implements ControlValueAcc
     serviceUrl: string;
     label: string;
     name: string;
+    multiple: boolean;
     message: any[];
     labelRow: number;
     inputRow: number;

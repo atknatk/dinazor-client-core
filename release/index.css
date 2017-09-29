@@ -1,5 +1,5 @@
 /**
- * @dinazor/core v"1.0.91" (http://git.klcyazilim.com/dinazor-client-libs/dn-core)
+ * @dinazor/core v"1.0.97" (http://git.klcyazilim.com/dinazor-client-libs/dn-core)
  * Copyright 2017
  * Licensed under MIT
  */
@@ -2071,7 +2071,7 @@ input[type="button"].btn-block {
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url(f4769f9bdb7466be65088239c12046d1.eot);
-  src: url(f4769f9bdb7466be65088239c12046d1.eot?#iefix) format("embedded-opentype"), url(fa2772327f55d8198301fdb8bcfc8158.woff) format("woff"), url(e18bbf611f2a2e43afc071aa2f4e1512.ttf) format("truetype"), url(89889688147bd7575d6327160d64e760.svg#glyphicons_halflingsregular) format("svg"); }
+  src: url(f4769f9bdb7466be65088239c12046d1.eot?#iefix) format("embedded-opentype"), url(fa2772327f55d8198301fdb8bcfc8158.woff) format("woff"), url(e18bbf611f2a2e43afc071aa2f4e1512.ttf) format("truetype"), url(f721466883998665b87923b92dea655b.svg#glyphicons_halflingsregular) format("svg"); }
 
 .glyphicon {
   position: relative;
@@ -7211,7 +7211,7 @@ body.nooverflow {
 @font-face {
   font-family: 'FontAwesome';
   src: url(90186830c9c50a0fed932494581761d9.eot);
-  src: url(90186830c9c50a0fed932494581761d9.eot?#iefix&v=4.2.0) format("embedded-opentype"), url(fdf491ce5ff5b2da02708cd0e9864719.woff) format("woff"), url(4f0022f25672c7f501c339cbf98d9117.ttf) format("truetype"), url(776d58f453c8fe5d6a89e9c31ee223ff.svg#fontawesomeregular) format("svg");
+  src: url(90186830c9c50a0fed932494581761d9.eot?#iefix&v=4.2.0) format("embedded-opentype"), url(fdf491ce5ff5b2da02708cd0e9864719.woff) format("woff"), url(4f0022f25672c7f501c339cbf98d9117.ttf) format("truetype"), url(dc89f84240347782f3a88e9f4d2d62e7.svg#fontawesomeregular) format("svg");
   font-weight: normal;
   font-style: normal; }
 

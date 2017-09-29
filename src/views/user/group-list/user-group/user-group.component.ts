@@ -9,7 +9,7 @@ import { DnHttpService } from '../../../../services/http.service';
 import { DnNotificationService } from '../../../../services/notification.service';
 import { isNullOrUndefined, isNullOrUndefinedOrEmpty } from '../../../../utils/check';
 import { DnAuthService } from '../../../auth/auth.service';
-import { dinazorRoles } from '../../../auth/dinazor-roles';
+import { dinazorRoles } from '../../../../dinazor-role-enum';
 
 const KEY_CODE_ENTER = 13;
 const KEY_CODE_DELETE = 8;
@@ -32,7 +32,7 @@ export class DnUserGroupListComponent extends DnLoadingBase implements OnInit {
 
     @ViewChild('rolegroupselect') public roleGroupSelect: DnSelect2SmartContainerComponent;
     @ViewChild('userselect') public userSelect: DnSelect2SmartContainerComponent;
-    dinazorRoles = dinazorRoles;
+    dinazorRoles= dinazorRoles;
     auth: DnAuthService;
     private kullaniciGrubuListesi: any[];
     private kullaniciListesi: any[];

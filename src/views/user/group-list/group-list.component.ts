@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DnAuthService } from '../../auth/auth.service';
-import { dinazorRoles } from '../../auth/dinazor-roles';
 import { DnUserGroupListComponent } from './user-group/user-group.component';
+import { dinazorRoles } from '../../../dinazor-role-enum';
 
 /**
  * Created by cabbar on 03.05.2017.

@@ -4,4 +4,3 @@ export * from './login';
 export * from './register';
 export * from './logout';
 export * from './auth.service';
-export * from './dinazor-roles';

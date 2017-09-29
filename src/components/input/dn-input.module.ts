@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DnInputComponent } from './dn-input.component';
 import { DnSmartInputComponent } from './smart-input/dn-smart-input.component';
 import { DnTextareaComponent } from './dn-textarea/dn-textarea.component';
+import { DnSmartTextareaComponent } from './dn-smart-textarea/dn-smart-textarea.component';
 
 /**
  * Created by cabbar on 12.04.2017.
@@ -13,7 +14,8 @@ import { DnTextareaComponent } from './dn-textarea/dn-textarea.component';
     declarations: [
         DnInputComponent,
         DnSmartInputComponent,
-        DnTextareaComponent
+        DnTextareaComponent,
+        DnSmartTextareaComponent
     ],
     imports: [
         CommonModule,
@@ -23,7 +25,8 @@ import { DnTextareaComponent } from './dn-textarea/dn-textarea.component';
     exports: [
         DnInputComponent,
         DnSmartInputComponent,
-        DnTextareaComponent
+        DnTextareaComponent,
+        DnSmartTextareaComponent
     ]
 })
 export class DnInputModule {

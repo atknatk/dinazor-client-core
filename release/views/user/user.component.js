@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DnAuthService } from '../auth/auth.service';
-import { dinazorRoles } from '../auth/dinazor-roles';
+import { dinazorRoles } from '../../dinazor-role-enum';
 var DnUserComponent = /** @class */ (function () {
     function DnUserComponent(_authService) {
         this._authService = _authService;

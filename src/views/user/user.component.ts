@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DnGroupListComponent } from './group-list/group-list.component';
 import { DnAuthService } from '../auth/auth.service';
-import { dinazorRoles } from '../auth/dinazor-roles';
+import { dinazorRoles } from '../../dinazor-role-enum';
 
 @Component({
     selector: 'dn-user',

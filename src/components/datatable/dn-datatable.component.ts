@@ -229,10 +229,14 @@ export class DnDatatableComponent implements OnInit {
             });
         }
         let z = 0;
-        this.dnDatatableBase.columns.forEach(column => {
-            options.columns[z].title = column.title;
-            z++;
-        });
+        if (this.dnDatatableBase && this.dnDatatableBase.columns && options.columns)
+            this.dnDatatableBase.columns.forEach(column => {
+                const optionColumns = options.columns.filter(item => column.serverKey === item.data);
+                if (optionColumns && optionColumns.length === 1) {
+                    optionColumns[0].title = column.title;
+                }
+                z++;
+            });
 
 //    col['render'] = $.fn.dataTable.render.moment( 'X', 'Do MMM YY' )
 

@@ -45,7 +45,7 @@ declare let $: any;
                                 [displaySelect]='displaySelect'
                                 [selectedText]='selectedText'
                                 [referenceMode]='referenceMode'
-                                [multiple]='false'
+                                [multiple]='multiple'
                                 [minimumInputLength]='minimumInputLength'
                                 [placeholder]='placeholder'
                                 (onSelect)='onSelectEvent($event)'
@@ -147,6 +147,7 @@ export class DnSelect2SmartContainerComponent implements ControlValueAccessor, O
     @Input() serviceUrl: string;
     @Input() label: string;
     @Input() name: string;
+    @Input() multiple: boolean;
     // @Input() validators: DnQuestionValidatorBase[];
     @Input() message: any[];
     @Input() labelRow: number = 4;

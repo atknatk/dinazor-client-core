@@ -1,6 +1,5 @@
 export const config: any = {
 
-
     DINAZOR_USER_KEY: 'dinazorUser',
 
     defaultLocale: 'tr',
