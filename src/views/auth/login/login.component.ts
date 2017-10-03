@@ -38,7 +38,7 @@ import { DnLoginConfigService } from './login-config.service';
                                     </header>
                                     <fieldset>
                                         <section>
-                                            <label class="label">Kullanıcı Adı</label>
+                                            <label class="label">Kullanıcı Mail Adresi</label>
                                             <label class="input"> <i class="icon-append fa fa-user"></i>
                                                 <input type="text" name="username" data-smart-validate-input=""
                                                        data-required=""
@@ -46,7 +46,7 @@ import { DnLoginConfigService } from './login-config.service';
                                                        formControlName="username">
                                                 <b class="tooltip tooltip-top-right"><i
                                                         class="fa fa-user txt-color-teal"></i>
-                                                    Lütfen kullanıcı adını giriniz</b></label>
+                                                    Lütfen Kullanıcı Mail Adresi giriniz</b></label>
                                         </section>
                                         <section>
                                             <label class="label">Şifre</label>

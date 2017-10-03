@@ -203,13 +203,8 @@ export class DnCrudComponent implements OnInit {
             res => {
                 if (res.isSuccess) {
                     this.datatableComponent.datatable.draw();
-                    this.notificationService.showSuccess('Kayıt başarılı bir şekilde güncellendi.');
-                } else {
-                    this.notificationService.showError('İşlem sırasında bir hata oluştu.');
                 }
-            },
-            err => {
-                this.notificationService.showError('Server tarafında işlem sırasında bir hata oluştu.');
+                this.notificationService.showDinazorResultMessage(res);
             });
 
     }
@@ -224,13 +219,8 @@ export class DnCrudComponent implements OnInit {
             res => {
                 if (res.isSuccess) {
                     this.datatableComponent.datatable.draw();
-                    this.notificationService.showSuccess('Yeni kayıt başarılı bir şekilde eklendi.');
-                } else {
-                    this.notificationService.showError('İşlem sırasında bir hata oluştu.');
                 }
-            },
-            err => {
-                this.notificationService.showError('Server tarafında işlem sırasında bir hata oluştu.');
+                this.notificationService.showDinazorResultMessage(res);
             });
 
     }
