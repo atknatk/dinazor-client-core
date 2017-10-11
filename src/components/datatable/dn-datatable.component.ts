@@ -49,7 +49,7 @@ export class DnDatatableComponent implements OnInit {
     @Output() actionEditEmitter: EventEmitter<any> = new EventEmitter();
     @Output() actionDeleteEmitter: EventEmitter<any> = new EventEmitter();
 
-    constructor(private el: ElementRef, private http: Http, private cdRef: ChangeDetectorRef,
+    constructor(private el: ElementRef, private cdRef: ChangeDetectorRef,
                 private dnStorageService: DnStorageService) {
     }
 
@@ -128,16 +128,25 @@ export class DnDatatableComponent implements OnInit {
             retrieve: true,
             responsive: true,
             searching: true,
-            initComplete: (settings, json) => {
+            initComplete: (/*settings, json*/) => {
                 element.parent().find('.input-sm').removeClass('input-sm').addClass('input-md');
             },
             fnDrawCallback: () => {
                 //   console.log('[fnDrawCallback] enter: ' + this);
                 this.cdRef.detectChanges();
-                this.el.nativeElement.querySelectorAll('button.btn-primary')
-                    .forEach(b => b.addEventListener('click', this.actionEdit.bind(this)));
-                this.el.nativeElement.querySelectorAll('button.btn-danger')
-                    .forEach(b => b.addEventListener('click', this.actionDelete.bind(this)));
+                const primary = this.el.nativeElement.querySelectorAll('button.btn-primary');
+                for (let i = 0; i < primary.length; i++) {
+                    const item = primary[i];
+                    item.addEventListener('click', this.actionEdit.bind(this));
+                }
+                const danger = this.el.nativeElement.querySelectorAll('button.btn-danger');
+                for (let i = 0; i < danger.length; i++) {
+                    const item = danger[i];
+                    item.addEventListener('click', this.actionEdit.bind(this));
+                }
+                // ths.el.nativeElement.querySelectorAll('button.btn-danger')
+                // .forEach(b => b.addEventListener('click', ths.actionDelete.bind(ths)));
+
             },
             fnHeaderCallback: (nHead, aData, iStart, iEnd, aiDisplay) => {
                 // nHead.getElementsByTagName('th')[0].innerHTML = 'Displaying ' + (iEnd - iStart) + ' records';

@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Compiler, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DnNotificationService } from '../../../services/notification.service';
 import { DnAuthService } from '../auth.service';
 var DnLogoutComponent = /** @class */ (function () {
-    function DnLogoutComponent(router, notificationService, authService) {
+    function DnLogoutComponent(router, notificationService, authService, _compiler) {
         this.router = router;
         this.notificationService = notificationService;
         this.authService = authService;
+        this._compiler = _compiler;
     }
     DnLogoutComponent.prototype.logout = function () {
         this.authService.logout();
-        this.router.navigate(['/auth/login']);
+        this._compiler.clearCache();
+        this.router.navigate(['/auth/login']).then(function () {
+            location.reload();
+        });
     };
     DnLogoutComponent.prototype.showPopup = function () {
         var _this = this;
@@ -36,6 +40,7 @@ var DnLogoutComponent = /** @class */ (function () {
         { type: Router, },
         { type: DnNotificationService, },
         { type: DnAuthService, },
+        { type: Compiler, },
     ]; };
     return DnLogoutComponent;
 }());

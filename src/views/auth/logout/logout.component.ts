@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Compiler, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DnNotificationService } from '../../../services/notification.service';
 import { DnAuthService } from '../auth.service';
@@ -20,12 +20,16 @@ export class DnLogoutComponent {
 
     constructor(private router: Router,
                 private notificationService: DnNotificationService,
-                private authService: DnAuthService) {
+                private authService: DnAuthService,
+                private _compiler: Compiler) {
     }
 
     logout() {
         this.authService.logout();
-        this.router.navigate(['/auth/login']);
+        this._compiler.clearCache();
+        this.router.navigate(['/auth/login']).then(() => {
+            location.reload();
+        });
     }
 
     showPopup() {

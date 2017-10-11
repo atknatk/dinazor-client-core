@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Compiler, NgModule } from '@angular/core';
 import { DnHttpService } from '../../../services/http.service';
-import { DnLogoutComponent } from './logout.component';
-import { DnAuthService } from '../auth.service';
 import { DnNotificationService } from '../../../services/notification.service';
 import { DnStorageService } from '../../../services/storage.service';
+import { DnAuthService } from '../auth.service';
+import { DnLogoutComponent } from './logout.component';
 var DnLogoutModule = /** @class */ (function () {
     function DnLogoutModule() {
     }
@@ -15,7 +15,7 @@ var DnLogoutModule = /** @class */ (function () {
                     ],
                     declarations: [DnLogoutComponent],
                     exports: [DnLogoutComponent],
-                    providers: [DnHttpService, DnAuthService, DnNotificationService, DnStorageService]
+                    providers: [DnHttpService, DnAuthService, DnNotificationService, DnStorageService, Compiler]
                 },] },
     ];
     /** @nocollapse */

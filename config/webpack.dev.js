@@ -29,7 +29,7 @@ module.exports = function (config) {
             },
             proxy: {
                 "/api": {
-                    "target": "http://192.168.1.18:5001/api",
+                    "target": "http://192.168.1.18/gtbpgd/api",
                     "secure": false,
                     "pathRewrite": {
                         "^/api": ""

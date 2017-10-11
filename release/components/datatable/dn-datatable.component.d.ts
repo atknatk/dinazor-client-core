@@ -1,12 +1,10 @@
 import { ChangeDetectorRef, ElementRef, EventEmitter, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import 'datatables.net-bs';
 import 'datatables.net-buttons-bs';
 import { DnStorageService } from '../../services/storage.service';
 import { DnDatatableBase } from './dn-datatable.base';
 export declare class DnDatatableComponent implements OnInit {
     private el;
-    private http;
     private cdRef;
     private dnStorageService;
     datatable: any;
@@ -22,7 +20,7 @@ export declare class DnDatatableComponent implements OnInit {
     deleteButton: boolean;
     actionEditEmitter: EventEmitter<any>;
     actionDeleteEmitter: EventEmitter<any>;
-    constructor(el: ElementRef, http: Http, cdRef: ChangeDetectorRef, dnStorageService: DnStorageService);
+    constructor(el: ElementRef, cdRef: ChangeDetectorRef, dnStorageService: DnStorageService);
     actionDelete(event: any): void;
     actionEdit(event: any): void;
     ngOnInit(): void;

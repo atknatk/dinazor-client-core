@@ -14,7 +14,7 @@
 
 // Libraries (Remove if not needed)
 @import "library/fontawesome/font-awesome";
-@import "library/animation/animation-engine";
+//@import "library/animation/animation-engine";
 @import "library/jqueryui/jquery-ui-1.10.3.custom";
 //@import "library/flags/flags";
 @import "library/cursors/cursors";
@@ -24,14 +24,14 @@
 // Components
 @import "smartadmin/component-fullscreen";
 @import "smartadmin/component-jqueryui"; // dependency: jquery-ui-1.10.3.custom
-@import "smartadmin/component-pricingtable";
-@import "smartadmin/component-pace";
-@import "smartadmin/component-smartchat";
+//@import "smartadmin/component-pricingtable";
+//@import "smartadmin/component-pace";
+//@import "smartadmin/component-smartchat";
 @import "smartadmin/component-smartforms";
 
 // Pages
 @import "smartadmin/page-error";
-@import "smartadmin/page-extr";
+//@import "smartadmin/page-extr";
 
 // Sections
 //@import "smartadmin/section-nestables";

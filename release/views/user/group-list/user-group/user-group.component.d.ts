@@ -46,4 +46,5 @@ export declare class DnUserGroupListComponent extends DnLoadingBase implements O
     private loadRoleGroupFromUserGroup(id);
     private loadUserFromUserGroup(id);
     private setClickedKullaniciGrubuRow(i);
+    private userSelectDisplay(item);
 }

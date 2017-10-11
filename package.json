@@ -1,6 +1,6 @@
 {
   "name": "@dinazor/core",
-  "version": "1.0.97",
+  "version": "1.0.113",
   "description": "@dinazor/core is a Angular2+ component core library.",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
@@ -20,10 +20,11 @@
     "copy:styles": "cpx -v \"build/**/*.css\" \"release\"",
     "release": "cross-env NODE_ENV=production npm run build",
     "version": "chg release -y && git add -A CHANGELOG.md",
-    "package": "npm-run-all -s clean:release copy:build build:sass package:replace-scss package:aot build:package copy:styles package:minify clean:build",
+    "package": "npm-run-all -s clean:release copy:build build:sass package:replace-scss package:aot build:package copy:styles package:minify package:minifycss clean:build",
     "package:ts": "tsc --outDir release",
     "package:aot": "ngc -p tsconfig-aot.json",
     "package:minify": "uglifyjs release/index.js --source-map --compress --mangle --screw-ie8 --output release/index.min.js",
+    "package:minifycss": "uglifycss --max-line-len 500 --expand-vars release/index.css > release/index.min.css",
     "package:replace-scss": "node ./config/replace.js",
     "deploy": "node ./config/deploy.js",
     "tag": "release-it"

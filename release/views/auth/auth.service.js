@@ -22,14 +22,14 @@ var DnAuthService = /** @class */ (function () {
             return roles.indexOf(elem) > -1;
         }).length > 0;
     };
-    DnAuthService.prototype.login = function (username, password) {
+    DnAuthService.prototype.login = function (mail, password) {
         var data = {
-            username: username,
+            mail: mail,
             password: password,
             client: {
                 hddSerialNo: 'hdd',
                 biosVersion: '1.1.1',
-                username: username,
+                mail: mail,
                 password: password,
                 clientIdentifier: '1.1.1hddaatika123'
             }

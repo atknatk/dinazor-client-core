@@ -10,6 +10,6 @@ export declare class DnAuthService {
     user: AuthUser;
     constructor(dnService: DnHttpService<DnResultDataBase<any>>, dnStorageService: DnStorageService);
     isAuthorized(roles: number[]): boolean;
-    login(username: string, password: string): Observable<DnResultDataBase<any>>;
+    login(mail: string, password: string): Observable<DnResultDataBase<any>>;
     logout(): void;
 }

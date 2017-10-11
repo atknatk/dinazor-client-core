@@ -2,7 +2,7 @@
  * Created by cabbar on 19.04.2017.
  */
 export interface AuthUser {
-    username: string;
+    mail: string;
     password: string;
     token: string;
     id: number;

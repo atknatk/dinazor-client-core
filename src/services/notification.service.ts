@@ -101,7 +101,7 @@ export class DnNotificationService {
         } else if (res.status === 6 || res['Status'] === 6) {
             this.showWarning('Zaten mevcut bir kayıt eklemek istediniz. İşleminiz gerçekleştirilmemiştir.');
         } else if (res.status === 10 || res['Status'] === 10) {
-            this.showWarning('Giriş işlemi başarızdır. Kullanıcı Adı veya Şifre Hatalı!');
+            this.showWarning('Giriş işlemi başarızdır. Kullanıcı Maili veya Şifre Hatalı!');
         } else if (res.status === 11 || res['Status'] === 11) {
             this.showWarning('Hatalı bir token gönderiyorsunuz. Çıkış yapıp tekrar giriş yapınız.');
         } else if (res.status === 14 || res['Status'] === 14) {

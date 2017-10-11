@@ -119,7 +119,8 @@ export class DnSmartInputComponent implements ControlValueAccessor, OnInit {
             } else {
                 inputMask.mask = this.mask;
             }
-            const im = this.mask === 'dnDatetime' ? new Inputmask('datetime', this.getDatetime(onincomplete)) : new Inputmask(inputMask);
+            const im = this.mask === 'dnDatetime' ? new Inputmask('datetime', this.getDatetime(onincomplete))
+                : new Inputmask(inputMask);
             im.mask(this.termInput.nativeElement);
         }
     }

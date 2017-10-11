@@ -89,7 +89,7 @@ var DnRoleGroupListComponent = /** @class */ (function (_super) {
             this._nfs.showWarning('Kullanıcı grubu adı giriniz.!!');
         }
         else {
-            this._http.post({ name: val }, 'roleGroup', this.loadingContext()).subscribe(function (res) {
+            this._http.post({ name: val }, 'roleGroup', this.loadingContext(this)).subscribe(function (res) {
                 if (res.isSuccess) {
                     _this.loadRoleGrubu();
                     _this.roleGrubuTerm.nativeElement.select();

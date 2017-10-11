@@ -5,11 +5,11 @@ import 'jquery-ui-npm/jquery-ui.min.js';
 import { DnLoadingBase } from '../../../../components/loading/dn-loading.base';
 import { DnSelect2Item } from '../../../../components/select/select2/dn-select2-item';
 import { DnSelect2SmartContainerComponent } from '../../../../components/select/select2/dn-select2-smart-container/dn-select2-smart-container.component';
+import { dinazorRoles } from '../../../../dinazor-role-enum';
 import { DnHttpService } from '../../../../services/http.service';
 import { DnNotificationService } from '../../../../services/notification.service';
 import { isNullOrUndefined, isNullOrUndefinedOrEmpty } from '../../../../utils/check';
 import { DnAuthService } from '../../../auth/auth.service';
-import { dinazorRoles } from '../../../../dinazor-role-enum';
 
 const KEY_CODE_ENTER = 13;
 const KEY_CODE_DELETE = 8;
@@ -32,7 +32,7 @@ export class DnUserGroupListComponent extends DnLoadingBase implements OnInit {
 
     @ViewChild('rolegroupselect') public roleGroupSelect: DnSelect2SmartContainerComponent;
     @ViewChild('userselect') public userSelect: DnSelect2SmartContainerComponent;
-    dinazorRoles= dinazorRoles;
+    dinazorRoles = dinazorRoles;
     auth: DnAuthService;
     private kullaniciGrubuListesi: any[];
     private kullaniciListesi: any[];
@@ -44,13 +44,8 @@ export class DnUserGroupListComponent extends DnLoadingBase implements OnInit {
     private kullaniciAtamaLoading: boolean = false;
     private roleGroupAtamaLoading: boolean = false;
     private config = {
-        userSelect: (item) => {
-            return item.entity.username + ' (' + item.entity.name + ' ' + item.entity.surname + ')';
-        },
-        userSelectTable: (item) => {
-            return item.username + ' (' + item.name + ' ' + item.surname + ')';
-        }
-
+        userSelect: (item) => this.userSelectDisplay(item),
+        userSelectTable: (item) => this.userSelectDisplay(item)
     };
     @ViewChild('kullanicigrubuterm') private kullaniciGrubuTerm: any;
     @ViewChild('kullanicigrubusearchterm') private kullaniciGrubuSearchTerm: any;
@@ -139,7 +134,7 @@ export class DnUserGroupListComponent extends DnLoadingBase implements OnInit {
         if (isNullOrUndefinedOrEmpty(val)) {
             this._nfs.showWarning('Kullanıcı grubu adı giriniz.!!');
         } else {
-            this._http.post({name: val}, 'userGroup', this.loadingContext()).subscribe(res => {
+            this._http.post({name: val}, 'userGroup', this.loadingContext(this)).subscribe(res => {
                 if (res.isSuccess) {
                     this.loadKullaniciGrubu();
                     this.kullaniciGrubuTerm.nativeElement.select();
@@ -248,7 +243,14 @@ export class DnUserGroupListComponent extends DnLoadingBase implements OnInit {
             this.loadUserFromUserGroup(this.kullaniciGrubuFilteredList[i].id);
             this.loadRoleGroupFromUserGroup(this.kullaniciGrubuFilteredList[i].id);
         }
+    }
 
+    private userSelectDisplay(item: DnSelect2Item): string {
+        if (isNullOrUndefined(item.entity.name) || isNullOrUndefined(item.entity.surname)) {
+            return item.entity.mail;
+        } else {
+            return item.entity.mail + ' (' + item.entity.name + ' ' + item.entity.surname + ')';
+        }
     }
 
 }

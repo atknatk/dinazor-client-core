@@ -9,19 +9,19 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DnLoadingBase } from '../../../components/loading/dn-loading.base';
-import { DnQuestionFormBase } from '../../../components/dynamic-form/dn-question/dn-question-form-base';
-import { Guid } from '../../../utils/guid';
-import { DnQuestionRowList } from '../../../components/dynamic-form/dn-question/dn-question-row-list';
-import { DnQuestionRowBase } from '../../../components/dynamic-form/dn-question/dn-question-row-base';
-import { DnTextboxQuestion } from '../../../components/dynamic-form/dn-question/dn-question-textbox';
-import { DnQuestionRequiredValidator } from '../../../components/dynamic-form/dn-question-validator/dn-question-required-validator';
-import { DnQuestionLengthValidator } from '../../../components/dynamic-form/dn-question-validator/dn-question-lenght-validator';
+import { DnDatatableColumnBase } from '../../../components/datatable/dn-datatable-column.base';
+import { DnDatatableBase } from '../../../components/datatable/dn-datatable.base';
 import { DnQuestionDifferentValidator } from '../../../components/dynamic-form/dn-question-validator/dn-question-different-validator';
 import { DnQuestionIdenticalValidator } from '../../../components/dynamic-form/dn-question-validator/dn-question-identical-validator';
-import { DnDatatableBase } from '../../../components/datatable/dn-datatable.base';
-import { DnDatatableColumnBase } from '../../../components/datatable/dn-datatable-column.base';
+import { DnQuestionLengthValidator } from '../../../components/dynamic-form/dn-question-validator/dn-question-lenght-validator';
+import { DnQuestionRequiredValidator } from '../../../components/dynamic-form/dn-question-validator/dn-question-required-validator';
+import { DnQuestionFormBase } from '../../../components/dynamic-form/dn-question/dn-question-form-base';
+import { DnQuestionRowBase } from '../../../components/dynamic-form/dn-question/dn-question-row-base';
+import { DnQuestionRowList } from '../../../components/dynamic-form/dn-question/dn-question-row-list';
+import { DnTextboxQuestion } from '../../../components/dynamic-form/dn-question/dn-question-textbox';
+import { DnLoadingBase } from '../../../components/loading/dn-loading.base';
 import { dinazorRoles } from '../../../dinazor-role-enum';
+import { Guid } from '../../../utils/guid';
 var DnUserListComponent = /** @class */ (function (_super) {
     __extends(DnUserListComponent, _super);
     function DnUserListComponent() {
@@ -39,8 +39,8 @@ var DnUserListComponent = /** @class */ (function (_super) {
                             new DnQuestionRowBase({
                                 rowSize: 11,
                                 question: new DnTextboxQuestion({
-                                    key: 'username',
-                                    label: 'Kullanıcı Adı',
+                                    key: 'mail',
+                                    label: 'Kullanıcı Mail Adresi',
                                     type: 'text',
                                     validator: [
                                         new DnQuestionRequiredValidator(),
@@ -96,25 +96,6 @@ var DnUserListComponent = /** @class */ (function (_super) {
                             new DnQuestionRowBase({
                                 rowSize: 11,
                                 question: new DnTextboxQuestion({
-                                    key: 'mail',
-                                    label: 'Mail',
-                                    type: 'mail',
-                                    validator: [
-                                        new DnQuestionRequiredValidator(),
-                                        new DnQuestionLengthValidator({
-                                            maxLength: 100,
-                                            minLength: 3
-                                        })
-                                    ]
-                                })
-                            })
-                        ]
-                    }),
-                    new DnQuestionRowList({
-                        row: [
-                            new DnQuestionRowBase({
-                                rowSize: 11,
-                                question: new DnTextboxQuestion({
                                     key: 'password',
                                     label: 'Şifre',
                                     type: 'password',
@@ -125,7 +106,7 @@ var DnUserListComponent = /** @class */ (function (_super) {
                                             minLength: 3
                                         }),
                                         new DnQuestionDifferentValidator({
-                                            field: 'username',
+                                            field: 'mail',
                                             message: 'Şifre kullanıcı adı ile aynı olamaz'
                                         }),
                                         new DnQuestionIdenticalValidator({
@@ -152,8 +133,8 @@ var DnUserListComponent = /** @class */ (function (_super) {
                                             minLength: 3
                                         }),
                                         new DnQuestionDifferentValidator({
-                                            field: 'username',
-                                            message: 'Şifre kullanıcı adı ile aynı olamaz'
+                                            field: 'mail',
+                                            message: 'Şifre kullanıcı maili ile aynı olamaz'
                                         }),
                                         new DnQuestionIdenticalValidator({
                                             field: 'password',
@@ -191,8 +172,8 @@ var DnUserListComponent = /** @class */ (function (_super) {
                             new DnQuestionRowBase({
                                 rowSize: 6,
                                 question: new DnTextboxQuestion({
-                                    key: 'username',
-                                    label: 'Kullanıcı Adı'
+                                    key: 'mail',
+                                    label: 'Kullanıcı Mail Adresi'
                                 })
                             }),
                             new DnQuestionRowBase({
@@ -212,14 +193,6 @@ var DnUserListComponent = /** @class */ (function (_super) {
                                     key: 'surname',
                                     label: 'Soyadı'
                                 })
-                            }),
-                            new DnQuestionRowBase({
-                                rowSize: 6,
-                                question: new DnTextboxQuestion({
-                                    key: 'mail',
-                                    label: 'Email',
-                                    type: 'email'
-                                })
                             })
                         ]
                     })
@@ -228,8 +201,8 @@ var DnUserListComponent = /** @class */ (function (_super) {
             datatableOptions: new DnDatatableBase({
                 columns: [
                     new DnDatatableColumnBase({
-                        title: 'Kullanıcı Adı',
-                        serverKey: 'username',
+                        title: 'Kullanıcı Mail Adresi',
+                        serverKey: 'mail',
                         orderable: false
                     }),
                     new DnDatatableColumnBase({
@@ -239,10 +212,6 @@ var DnUserListComponent = /** @class */ (function (_super) {
                     new DnDatatableColumnBase({
                         title: 'Soyad',
                         serverKey: 'surname'
-                    }),
-                    new DnDatatableColumnBase({
-                        title: 'Mail',
-                        serverKey: 'mail'
                     })
                 ],
                 option: {},

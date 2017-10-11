@@ -106,7 +106,7 @@ export class DnUserListComponent extends DnLoadingBase {
                                         minLength: 3
                                     }),
                                     new DnQuestionDifferentValidator({
-                                        field: 'username',
+                                        field: 'mail',
                                         message: 'Şifre kullanıcı adı ile aynı olamaz'
                                     }),
                                     new DnQuestionIdenticalValidator({
@@ -133,8 +133,8 @@ export class DnUserListComponent extends DnLoadingBase {
                                         minLength: 3
                                     }),
                                     new DnQuestionDifferentValidator({
-                                        field: 'username',
-                                        message: 'Şifre kullanıcı adı ile aynı olamaz'
+                                        field: 'mail',
+                                        message: 'Şifre kullanıcı maili ile aynı olamaz'
                                     }),
                                     new DnQuestionIdenticalValidator({
                                         field: 'password',

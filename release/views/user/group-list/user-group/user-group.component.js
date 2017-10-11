@@ -12,11 +12,11 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import 'jquery-ui-npm/jquery-ui.min.js';
 import { DnLoadingBase } from '../../../../components/loading/dn-loading.base';
+import { dinazorRoles } from '../../../../dinazor-role-enum';
 import { DnHttpService } from '../../../../services/http.service';
 import { DnNotificationService } from '../../../../services/notification.service';
 import { isNullOrUndefined, isNullOrUndefinedOrEmpty } from '../../../../utils/check';
 import { DnAuthService } from '../../../auth/auth.service';
-import { dinazorRoles } from '../../../../dinazor-role-enum';
 var KEY_CODE_ENTER = 13;
 var KEY_CODE_DELETE = 8;
 var DnUserGroupListComponent = /** @class */ (function (_super) {
@@ -32,12 +32,8 @@ var DnUserGroupListComponent = /** @class */ (function (_super) {
         _this.kullaniciAtamaLoading = false;
         _this.roleGroupAtamaLoading = false;
         _this.config = {
-            userSelect: function (item) {
-                return item.entity.username + ' (' + item.entity.name + ' ' + item.entity.surname + ')';
-            },
-            userSelectTable: function (item) {
-                return item.username + ' (' + item.name + ' ' + item.surname + ')';
-            }
+            userSelect: function (item) { return _this.userSelectDisplay(item); },
+            userSelectTable: function (item) { return _this.userSelectDisplay(item); }
         };
         _this.auth = _authService;
         return _this;
@@ -118,7 +114,7 @@ var DnUserGroupListComponent = /** @class */ (function (_super) {
             this._nfs.showWarning('Kullanıcı grubu adı giriniz.!!');
         }
         else {
-            this._http.post({ name: val }, 'userGroup', this.loadingContext()).subscribe(function (res) {
+            this._http.post({ name: val }, 'userGroup', this.loadingContext(this)).subscribe(function (res) {
                 if (res.isSuccess) {
                     _this.loadKullaniciGrubu();
                     _this.kullaniciGrubuTerm.nativeElement.select();
@@ -231,6 +227,14 @@ var DnUserGroupListComponent = /** @class */ (function (_super) {
             this.kullaniciGrubuSelectedRow = i;
             this.loadUserFromUserGroup(this.kullaniciGrubuFilteredList[i].id);
             this.loadRoleGroupFromUserGroup(this.kullaniciGrubuFilteredList[i].id);
+        }
+    };
+    DnUserGroupListComponent.prototype.userSelectDisplay = function (item) {
+        if (isNullOrUndefined(item.entity.name) || isNullOrUndefined(item.entity.surname)) {
+            return item.entity.mail;
+        }
+        else {
+            return item.entity.mail + ' (' + item.entity.name + ' ' + item.entity.surname + ')';
         }
     };
     DnUserGroupListComponent.decorators = [

@@ -87,7 +87,8 @@ var DnSmartInputComponent = /** @class */ (function () {
             else {
                 inputMask.mask = this.mask;
             }
-            var im = this.mask === 'dnDatetime' ? new Inputmask('datetime', this.getDatetime(onincomplete)) : new Inputmask(inputMask);
+            var im = this.mask === 'dnDatetime' ? new Inputmask('datetime', this.getDatetime(onincomplete))
+                : new Inputmask(inputMask);
             im.mask(this.termInput.nativeElement);
         }
     };

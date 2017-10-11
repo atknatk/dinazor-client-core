@@ -2,10 +2,13 @@ var DnLoadingBase = /** @class */ (function () {
     function DnLoadingBase() {
         this.loading = false;
     }
-    DnLoadingBase.prototype.loadingContext = function () {
-        // const that = this;
+    // protected readonly context: any;
+    // constructor(context: any) {
+    //     this.context = context;
+    // }
+    DnLoadingBase.prototype.loadingContext = function (context) {
         return {
-            // context: that,
+            context: context,
             loading: 'loading'
         };
     };

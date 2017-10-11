@@ -47,7 +47,7 @@
                                       paginationLength="true"
                                       [editButton]="crudData.datatableOptions.editButton && auth.isAuthorized([crudData.datatableOptions.editRole])"
                                       [deleteButton]="crudData.datatableOptions.deleteButton && auth.isAuthorized([crudData.datatableOptions.deleteRole])"
-                                      tableClass="table table-striped table-bordered table-hover"
+                                      tableClass="table table-bordered"
                                       (actionEditEmitter)="actionEdit($event)"
                                       (actionDeleteEmitter)="actionDelete($event)">
                         </dn-datatable>

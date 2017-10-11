@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Compiler, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { config } from '../../../dinazor.config';
@@ -40,10 +40,10 @@ import { DnLoginConfigService } from './login-config.service';
                                         <section>
                                             <label class="label">Kullanıcı Mail Adresi</label>
                                             <label class="input"> <i class="icon-append fa fa-user"></i>
-                                                <input type="text" name="username" data-smart-validate-input=""
+                                                <input type="text" name="mail" data-smart-validate-input=""
                                                        data-required=""
                                                        data-message-required="Lütfen kullanıcı adını giriniz"
-                                                       formControlName="username">
+                                                       formControlName="mail">
                                                 <b class="tooltip tooltip-top-right"><i
                                                         class="fa fa-user txt-color-teal"></i>
                                                     Lütfen Kullanıcı Mail Adresi giriniz</b></label>
@@ -90,7 +90,8 @@ export class DnLoginComponent implements OnInit {
                 private _fb: FormBuilder,
                 private notificationService: DnNotificationService,
                 private loginConfigService: DnLoginConfigService,
-                private storageService: DnStorageService) {
+                private storageService: DnStorageService,
+                private _compiler: Compiler) {
         this._loginConfigService = loginConfigService;
     }
 
@@ -100,9 +101,10 @@ export class DnLoginComponent implements OnInit {
 
         if (!isValid) return;
         this.submitted = true;
-        this.authService.login(data.username, data.password).subscribe(res => {
+        this.authService.login(data.mail, data.password).subscribe(res => {
             if (res.isSuccess) {
                 const user: AuthUser = res.data as AuthUser;
+                this._compiler.clearCache();
                 this.setLocalStorage(res.data);
                 if (this._loginConfigService.loginConfig.afterLoginSuccessEvent)
                     this._loginConfigService.loginConfig.afterLoginSuccessEvent(user);
@@ -118,12 +120,7 @@ export class DnLoginComponent implements OnInit {
                 // this.initializeLoginConfigs(res.data);
             } else {
                 this.loading = false;
-                this.notificationService.smallBox({
-                    title: 'Kullanıcı Adı ya da Şifre hatalı.',
-                    color: '#C46A69',
-                    iconSmall: 'fa fa-times bounce animated',
-                    timeout: 1000
-                });
+                this.notificationService.showDinazorResultMessage(res);
             }
         });
     }
@@ -131,12 +128,12 @@ export class DnLoginComponent implements OnInit {
     ngOnInit() {
         if (config.debugState) {
             this.loginForm = this._fb.group({
-                username: ['gtb', [Validators.required as any, Validators.minLength(3) as any]],
+                mail: ['gtb@gtb.gov.tr', [Validators.required as any, Validators.minLength(3) as any]],
                 password: ['gtb', [Validators.required as any, Validators.minLength(1)as any]]
             });
         } else {
             this.loginForm = this._fb.group({
-                username: ['', [Validators.required as any, Validators.minLength(3) as any]],
+                mail: ['', [Validators.required as any, Validators.minLength(3) as any]],
                 password: ['', [Validators.required as any, Validators.minLength(1)as any]]
             });
         }

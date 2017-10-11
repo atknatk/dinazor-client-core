@@ -29,14 +29,14 @@ export class DnAuthService {
         }).length > 0;
     }
 
-    login(username: string, password: string): Observable<DnResultDataBase<any>> {
+    login(mail: string, password: string): Observable<DnResultDataBase<any>> {
         const data: DnLoginBase = {
-            username,
+            mail,
             password,
             client: {
                 hddSerialNo: 'hdd',
                 biosVersion: '1.1.1',
-                username,
+                mail,
                 password,
                 clientIdentifier: '1.1.1hddaatika123'
             }

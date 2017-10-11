@@ -168,13 +168,8 @@ var DnCrudComponent = /** @class */ (function () {
         this.dnHttpService.put(data).subscribe(function (res) {
             if (res.isSuccess) {
                 _this.datatableComponent.datatable.draw();
-                _this.notificationService.showSuccess('Kayıt başarılı bir şekilde güncellendi.');
             }
-            else {
-                _this.notificationService.showError('İşlem sırasında bir hata oluştu.');
-            }
-        }, function (err) {
-            _this.notificationService.showError('Server tarafında işlem sırasında bir hata oluştu.');
+            _this.notificationService.showDinazorResultMessage(res);
         });
     };
     DnCrudComponent.prototype.getColumnTitle = function (column) {
@@ -186,13 +181,8 @@ var DnCrudComponent = /** @class */ (function () {
         this.dnHttpService.post(data).subscribe(function (res) {
             if (res.isSuccess) {
                 _this.datatableComponent.datatable.draw();
-                _this.notificationService.showSuccess('Yeni kayıt başarılı bir şekilde eklendi.');
             }
-            else {
-                _this.notificationService.showError('İşlem sırasında bir hata oluştu.');
-            }
-        }, function (err) {
-            _this.notificationService.showError('Server tarafında işlem sırasında bir hata oluştu.');
+            _this.notificationService.showDinazorResultMessage(res);
         });
     };
     DnCrudComponent.prototype.visibilityColumns = function (visible) {

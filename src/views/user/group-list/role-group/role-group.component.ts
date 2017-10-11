@@ -104,7 +104,7 @@ export class DnRoleGroupListComponent extends DnLoadingBase implements OnInit {
         if (isNullOrUndefinedOrEmpty(val)) {
             this._nfs.showWarning('Kullanıcı grubu adı giriniz.!!');
         } else {
-            this._http.post({name: val}, 'roleGroup', this.loadingContext()).subscribe(res => {
+            this._http.post({name: val}, 'roleGroup', this.loadingContext(this)).subscribe(res => {
                 if (res.isSuccess) {
                     this.loadRoleGrubu();
                     this.roleGrubuTerm.nativeElement.select();

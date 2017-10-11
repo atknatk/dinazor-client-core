@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { Http } from '@angular/http';
 // import '@dinazor/plugins/datatables-bundle/datatables.js';
 // import * as dCss from '@dinazor/plugins/datatables-bundle/datatables.min.css';
 // import * as dCss from 'datatables.net-dt/css/jquery.dataTables.css';
@@ -11,9 +10,8 @@ import { config } from '../../dinazor.config';
 import { DnStorageService } from '../../services/storage.service';
 import { isNullOrUndefined } from '../../utils/check';
 var DnDatatableComponent = /** @class */ (function () {
-    function DnDatatableComponent(el, http, cdRef, dnStorageService) {
+    function DnDatatableComponent(el, cdRef, dnStorageService) {
         this.el = el;
-        this.http = http;
         this.cdRef = cdRef;
         this.dnStorageService = dnStorageService;
         this.width = '100%';
@@ -91,16 +89,24 @@ var DnDatatableComponent = /** @class */ (function () {
             retrieve: true,
             responsive: true,
             searching: true,
-            initComplete: function (settings, json) {
+            initComplete: function () {
                 element.parent().find('.input-sm').removeClass('input-sm').addClass('input-md');
             },
             fnDrawCallback: function () {
                 //   console.log('[fnDrawCallback] enter: ' + this);
                 _this.cdRef.detectChanges();
-                _this.el.nativeElement.querySelectorAll('button.btn-primary')
-                    .forEach(function (b) { return b.addEventListener('click', _this.actionEdit.bind(_this)); });
-                _this.el.nativeElement.querySelectorAll('button.btn-danger')
-                    .forEach(function (b) { return b.addEventListener('click', _this.actionDelete.bind(_this)); });
+                var primary = _this.el.nativeElement.querySelectorAll('button.btn-primary');
+                for (var i = 0; i < primary.length; i++) {
+                    var item = primary[i];
+                    item.addEventListener('click', _this.actionEdit.bind(_this));
+                }
+                var danger = _this.el.nativeElement.querySelectorAll('button.btn-danger');
+                for (var i = 0; i < danger.length; i++) {
+                    var item = danger[i];
+                    item.addEventListener('click', _this.actionEdit.bind(_this));
+                }
+                // ths.el.nativeElement.querySelectorAll('button.btn-danger')
+                // .forEach(b => b.addEventListener('click', ths.actionDelete.bind(ths)));
             },
             fnHeaderCallback: function (nHead, aData, iStart, iEnd, aiDisplay) {
                 // nHead.getElementsByTagName('th')[0].innerHTML = 'Displaying ' + (iEnd - iStart) + ' records';
@@ -262,7 +268,6 @@ var DnDatatableComponent = /** @class */ (function () {
     /** @nocollapse */
     DnDatatableComponent.ctorParameters = function () { return [
         { type: ElementRef, },
-        { type: Http, },
         { type: ChangeDetectorRef, },
         { type: DnStorageService, },
     ]; };
