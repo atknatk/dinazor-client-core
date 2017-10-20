@@ -26,4 +26,3 @@ export class DnLoginConfig implements IDnLoginConfig {
         this.logo = config.logo;
     }
 }
-

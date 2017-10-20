@@ -103,7 +103,7 @@ export class DnUserListComponent extends DnLoadingBase {
                                     new DnQuestionRequiredValidator(),
                                     new DnQuestionLengthValidator({
                                         maxLength: 50,
-                                        minLength: 3
+                                        minLength: 6
                                     }),
                                     new DnQuestionDifferentValidator({
                                         field: 'mail',
@@ -118,33 +118,33 @@ export class DnUserListComponent extends DnLoadingBase {
                         })
                     ]
                 }),
-                new DnQuestionRowList({
-                    row: [
-                        new DnQuestionRowBase({
-                            rowSize: 11,
-                            question: new DnTextboxQuestion({
-                                key: 'confirmPassword',
-                                label: 'Şifre Tekrar',
-                                type: 'password',
-                                validator: [
-                                    new DnQuestionRequiredValidator(),
-                                    new DnQuestionLengthValidator({
-                                        maxLength: 50,
-                                        minLength: 3
-                                    }),
-                                    new DnQuestionDifferentValidator({
-                                        field: 'mail',
-                                        message: 'Şifre kullanıcı maili ile aynı olamaz'
-                                    }),
-                                    new DnQuestionIdenticalValidator({
-                                        field: 'password',
-                                        message: 'Şifre uyuşmuyor'
-                                    })
-                                ]
-                            })
-                        })
-                    ]
-                })
+                /*  new DnQuestionRowList({
+                      row: [
+                          new DnQuestionRowBase({
+                              rowSize: 11,
+                              question: new DnTextboxQuestion({
+                                  key: 'confirmPassword',
+                                  label: 'Şifre Tekrar',
+                                  type: 'password',
+                                  validator: [
+                                      new DnQuestionRequiredValidator(),
+                                      new DnQuestionLengthValidator({
+                                          maxLength: 50,
+                                          minLength: 3
+                                      }),
+                                      new DnQuestionDifferentValidator({
+                                          field: 'mail',
+                                          message: 'Şifre kullanıcı maili ile aynı olamaz'
+                                      }),
+                                      new DnQuestionIdenticalValidator({
+                                          field: 'password',
+                                          message: 'Şifre uyuşmuyor'
+                                      })
+                                  ]
+                              })
+                          })
+                      ]
+                  })*/
             ]
         }),
         searchForm: new DnQuestionFormBase({

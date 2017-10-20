@@ -1,10 +1,4 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Http } from '@angular/http';
-// import '@dinazor/plugins/datatables-bundle/datatables.js';
-// import * as dCss from '@dinazor/plugins/datatables-bundle/datatables.min.css';
-// import * as dCss from 'datatables.net-dt/css/jquery.dataTables.css';
-// import 'datatables.net/js/jquery.dataTables';
-// import '@dinazor/plugins/datatables-bundle/datatable-custom-ui';
 import 'datatables.net-bs';
 import 'datatables.net-buttons-bs';
 import { config } from '../../dinazor.config';
@@ -23,10 +17,7 @@ declare let $: any;
         <table id='{{dnDatatableBase.id}}' class='dataTable {{tableClass}}' width='{{width}}'>
             <ng-content></ng-content>
         </table>
-    `,
-    styles: [
-        // dCss
-    ]
+    `
 })
 export class DnDatatableComponent implements OnInit {
 
@@ -62,10 +53,6 @@ export class DnDatatableComponent implements OnInit {
     }
 
     ngOnInit() {
-        /*        Promise.all([
-                    System.import('script-loader!smartadmin-plugins/datatables-bundle/datatables.min.js'),
-                ]).then(() => {
-                });*/
         this.render();
     }
 
@@ -132,7 +119,6 @@ export class DnDatatableComponent implements OnInit {
                 element.parent().find('.input-sm').removeClass('input-sm').addClass('input-md');
             },
             fnDrawCallback: () => {
-                //   console.log('[fnDrawCallback] enter: ' + this);
                 this.cdRef.detectChanges();
                 const primary = this.el.nativeElement.querySelectorAll('button.btn-primary');
                 for (let i = 0; i < primary.length; i++) {
@@ -144,26 +130,12 @@ export class DnDatatableComponent implements OnInit {
                     const item = danger[i];
                     item.addEventListener('click', this.actionEdit.bind(this));
                 }
-                // ths.el.nativeElement.querySelectorAll('button.btn-danger')
-                // .forEach(b => b.addEventListener('click', ths.actionDelete.bind(ths)));
-
             },
             fnHeaderCallback: (nHead, aData, iStart, iEnd, aiDisplay) => {
                 // nHead.getElementsByTagName('th')[0].innerHTML = 'Displaying ' + (iEnd - iStart) + ' records';
             },
             processing: true,
             serverSide: true,
-            // ajax: (data, callback, settings) => {
-            //   this.http.get(options.url)
-            //     .map(this.extractData)
-            //     .catch(this.handleError)
-            //     .subscribe((data) => {
-            //       console.log('data from rest endpoint', data);
-            //       callback({
-            //         aaData: data.slice(0, 100)
-            //       })
-            //     })
-            // },
             ajax: {
                 url: 'api/' + options.url + '?token=' + token,
                 type: 'post',

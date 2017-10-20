@@ -24,6 +24,7 @@ export class DnAuthService {
     isAuthorized(roles: number[]): boolean {
         if (isNullOrUndefined(roles)) return false;
         if (roles.length === 1 && roles[0] === -1) return true;
+        if (isNullOrUndefined(this.user.roleList)) return false;
         return this.user.roleList.filter((elem) => {
             return roles.indexOf(elem) > -1;
         }).length > 0;

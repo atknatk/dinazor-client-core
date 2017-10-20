@@ -13,7 +13,9 @@ import { DnLoginConfigService } from './login-config.service';
     template: `
         <header id="header" class="animated fadeInDown">
             <div id="logo-group">
-                <span id="logo"> <img src="{{_loginConfigService.loginConfig.logo}}" alt="Dinazor"> </span>
+                <span id="logo"> 
+                    <img class="dn-logo" src="{{_loginConfigService.loginConfig.logo}}" alt="Dinazor"> 
+                </span>
             </div>
         </header>
         <div id="main" role="main" class="animated fadeInDown">
@@ -21,10 +23,11 @@ import { DnLoginConfigService } from './login-config.service';
             <div id="content" class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-                        <h1 class="txt-color-red login-header-big">{{_loginConfigService.loginConfig.title}}</h1>
+                        <h1 class="txt-color-red login-header-big" [innerHTML]="_loginConfigService.loginConfig.title">
+                        </h1>
 
                         <div class="pull-left login-desc-box-l">
-                            <h4 class="paragraph-header">{{_loginConfigService.loginConfig.description}}</h4>
+                            <h4 class="paragraph-header" [innerHTML]="_loginConfigService.loginConfig.description"></h4>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
@@ -96,7 +99,6 @@ export class DnLoginComponent implements OnInit {
     }
 
     login(data: AuthUser, isValid: boolean) {
-        event.preventDefault();
         this.loading = true;
 
         if (!isValid) return;
@@ -144,8 +146,8 @@ export class DnLoginComponent implements OnInit {
           //  this.initCacheableValues(data.token);
       }*/
 
-
     private setLocalStorage(data: any) {
+        this.storageService.removeItem(config.DINAZOR_USER_KEY);
         this.storageService.setItem(config.DINAZOR_USER_KEY, data);
         /* this.dnHttpService.setUrl('Gtbuser/' + data.id + '/User');
          this.dnHttpService.get('Gtbuser/' + data.id + '/User').subscribe(res => {
@@ -154,7 +156,6 @@ export class DnLoginComponent implements OnInit {
              }
          });*/
     }
-
 
     /*  private initCacheableValues(token: string) {
           this.cacheHttp.removeAll();

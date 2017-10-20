@@ -9,6 +9,7 @@ import { dinazorRoles } from '../../../../dinazor-role-enum';
 import { DnHttpService } from '../../../../services/http.service';
 import { DnNotificationService } from '../../../../services/notification.service';
 import { isNullOrUndefined, isNullOrUndefinedOrEmpty } from '../../../../utils/check';
+import { deepCopy } from '../../../../utils/copy';
 import { DnAuthService } from '../../../auth/auth.service';
 
 const KEY_CODE_ENTER = 13;
@@ -246,6 +247,9 @@ export class DnUserGroupListComponent extends DnLoadingBase implements OnInit {
     }
 
     private userSelectDisplay(item: DnSelect2Item): string {
+        if (isNullOrUndefined(item.entity)) {
+            item.entity = deepCopy(item);
+        }
         if (isNullOrUndefined(item.entity.name) || isNullOrUndefined(item.entity.surname)) {
             return item.entity.mail;
         } else {
