@@ -85,8 +85,7 @@ export class DnNotificationService {
         } else if (res.status === 2 || res['Status'] === 2) {
             this.showWarning('Eksik veri gönderdiğinizden dolayı işleminiz gerçekleştirilmemiştir. ' +
                 'Lütfen verilerinizi tekrak kontrol ediniz.');
-        } else if (res.status === 3 || res['Status'] === 3 ||
-            res.status === 7 || res['Status'] === 7 ||
+        } else if (res.status === 7 || res['Status'] === 7 ||
             res.status === 8 || res['Status'] === 8 ||
             res.status === 9 || res['Status'] === 9 ||
             res.status === 12 || res['Status'] === 12 ||
@@ -96,6 +95,8 @@ export class DnNotificationService {
             this.showError('İşleminiz sırasında beklenilmeyen bir hata oluşmuştur. Hata Kodu = ' + res.status);
         } else if (res.status === 4 || res['Status'] === 4) {
             this.showWarning('Yetkisiz bir işlem yapmak istediniz.');
+        } else if (res.status === 3 || res['Status'] === 3) {
+            this.showWarning('Girilen veriler hatalı ya da eksiktir.');
         } else if (res.status === 5 || res['Status'] === 5) {
             this.showWarning('İşlem yapmak istediğiniz kayıt bizde kayıtlı değildir.');
         } else if (res.status === 6 || res['Status'] === 6) {

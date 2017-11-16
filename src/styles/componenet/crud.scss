@@ -1,0 +1,33 @@
+.dinazor-width-animation {
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+}
+
+.dinazor-height-animation {
+  -webkit-transition: height 1s ease-in-out;
+  -moz-transition: height 1s ease-in-out;
+  -o-transition: height 1s ease-in-out;
+  transition: height 1s ease-in-out;
+}
+
+
+.dn-show-search-content {
+  display: block !important;
+  height: 100%;
+}
+
+.dn-search-body {
+
+  margin: 10px;
+}
+.dn-pagination-length{
+  right: -10px;
+  position: absolute;
+  padding-left: 15px!important;
+}
+
+.dn-toolbar{
+  height: 45px;
+}

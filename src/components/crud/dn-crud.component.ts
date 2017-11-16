@@ -214,7 +214,8 @@ export class DnCrudComponent implements OnInit {
     }
 
     private newDataProcess(data: any) {
-        data.id = this.currentId;
+        // data.id = this.currentId;
+        data.id = 0;
         this.dnHttpService.post(data).subscribe(
             res => {
                 if (res.isSuccess) {

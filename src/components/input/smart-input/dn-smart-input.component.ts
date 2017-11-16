@@ -30,7 +30,7 @@ declare let $: any;
                 <i *ngIf="icon" class="icon-append" [ngClass]="icon"></i>
                 <input #termInput
                        [(ngModel)]='value'
-                       type="text"
+                       [type]="type"
                        (blur)='onBlur()'
                        [formControl]='term'
                        (keypress)='keyPress($event)'
@@ -55,6 +55,7 @@ export class DnSmartInputComponent implements ControlValueAccessor, OnInit {
     @Input() inputCss: string = '';
     @Input() number: boolean = false;
     @Input() isDisabled: boolean = false;
+    @Input() type: string = 'text';
     @ViewChild('termLabel') private termLabel;
     @ViewChild('termInput') private termInput;
 

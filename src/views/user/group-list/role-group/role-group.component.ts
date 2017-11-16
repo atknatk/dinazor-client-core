@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import 'jquery-ui-npm/jquery-ui.min.js';
 import { DnLoadingBase } from '../../../../components/loading/dn-loading.base';
 import { DnSelect2Item } from '../../../../components/select/select2/dn-select2-item';
+import { dinazorRoles } from '../../../../dinazor-role-enum';
 import { DnHttpService } from '../../../../services/http.service';
 import { DnNotificationService } from '../../../../services/notification.service';
 import { isNullOrUndefined, isNullOrUndefinedOrEmpty } from '../../../../utils/check';
 import { DnAuthService } from '../../../auth/auth.service';
-import { dinazorRoles } from '../../../../dinazor-role-enum';
 
 const KEY_CODE_ENTER = 13;
 /**
@@ -45,6 +45,10 @@ export class DnRoleGroupListComponent extends DnLoadingBase implements OnInit {
                 private _authService: DnAuthService) {
         super();
         this.auth = _authService;
+    }
+
+    displayRole(item: DnSelect2Item): string {
+        return item.entity.displayName;
     }
 
     editRoleGrubu(item) {
@@ -204,5 +208,7 @@ export class DnRoleGroupListComponent extends DnLoadingBase implements OnInit {
         }
 
     }
+
+    // displayName
 
 }
