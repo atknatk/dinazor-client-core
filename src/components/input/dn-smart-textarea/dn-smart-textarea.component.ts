@@ -185,6 +185,15 @@ export class DnSmartTextareaComponent implements ControlValueAccessor, OnInit {
         }
     }
 
+    setDisabledState(isDisabled: boolean) {
+        if (isDisabled) {
+            this.term.disable();
+        } else {
+            this.term.enable();
+        }
+        this.term.updateValueAndValidity();
+    }
+
     subscribeToResults(observable: Observable<string>) {
         observable.subscribe(() => {
             if (!this.form) {

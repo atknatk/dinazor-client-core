@@ -4,8 +4,8 @@ import 'inputmask/dist/inputmask/inputmask.date.extensions';
 import 'inputmask/dist/inputmask/inputmask.extensions';
 import Inputmask from 'inputmask/dist/inputmask/inputmask.numeric.extensions';
 import 'inputmask/dist/inputmask/inputmask.phone.extensions';
-import { Observable } from 'rxjs/Rx';
-import { isNullOrUndefined, isString } from '../../utils/check';
+import { DnLoggerService } from '../../services/log/logger.service';
+import { isNullOrUndefined, isNullOrUndefinedOrEmpty, isString } from '../../utils/check';
 import { noop } from '../../utils/common';
 
 /**
@@ -33,7 +33,6 @@ declare let $: any;
                 <div class='col-md-{{inputRow}}' [ngClass]='inputRowCss'>
                     <input #termInput
                            [(ngModel)]='value'
-                           type='text'
                            (blur)='onBlur()'
                            [formControl]='term'
                            class='form-control'
@@ -59,7 +58,6 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
     @Input() inputRowCss: string = '';
     @Input() inputCss: string = '';
     @Input() number: boolean = false;
-    @Input() isDisabled: boolean = false;
     @ViewChild('termLabel') private termLabel;
     @ViewChild('termInput') private termInput;
 
@@ -71,6 +69,7 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
 
     constructor(@Attribute('formControlName') public formControlName,
                 @Attribute('disabled') public disabled,
+                private _log: DnLoggerService,
                 private el: ElementRef) {
     }
 
@@ -99,19 +98,17 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
         }
     }
 
-
     initMask() {
-        let ths = this;
         this.extendMask();
-        const onincomplete = function () {
-            if (ths && ths.form || isNullOrUndefined(ths.formControlName)) return;
-            ths.form.controls[ths.formControlName].patchValue(null);
-            ths.value = null;
+        const onincomplete = () => {
+            if (this && this.form || isNullOrUndefined(this.formControlName)) return;
+            this.form.controls[this.formControlName].patchValue(null);
+            this.value = null;
         };
 
         const inputMask: any = {
             showMaskOnHover: false,
-            onincomplete: onincomplete
+            onincomplete
         };
 
         if (this.mask) {
@@ -126,7 +123,9 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
             } else {
                 inputMask.mask = this.mask;
             }
-            const im = this.mask === 'dnDatetime' ? new Inputmask('datetime', this.getDatetime(onincomplete)) : new Inputmask(inputMask);
+            const im = this.mask === 'dnDatetime' ?
+                new Inputmask('datetime', this.getDatetime(onincomplete)) :
+                new Inputmask(inputMask);
             im.mask(this.termInput.nativeElement);
         }
     }
@@ -144,14 +143,26 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
     }
 
     ngOnInit(): void {
+        this._log.debug('DnInputComponent yükleniyor.(ngOnInit)', this.formControlName);
         this.setDisabled();
         this.initMask();
-        if (isNullOrUndefined(this.form)) return;
+        if (isNullOrUndefined(this.form)) {
+            this._log.debug('DnInputComponent form null.(ngOnInit)', this.formControlName);
+            return;
+        }
+        if (isNullOrUndefinedOrEmpty(this.formControlName)) {
+            this._log.debug('DnInputComponent formControlName null.(ngOnInit)', this.formControlName);
+            return;
+        }
         if (isNullOrUndefined(this.form.controls[this.formControlName])) {
+            this._log.debug('DnInputComponent form\'a formControlName ekleniyor.(ngOnInit)', this.formControlName);
             this.form.addControl(this.formControlName, new FormControl(null));
         }
         this.formControl = this.form.get(this.formControlName);
-
+        if (this.formControl && this.formControl.disabled) {
+            this._log.debug('DnInputComponent formControl\'a term disable edildi.(ngOnInit)', this.formControlName);
+            this.term.disable();
+        }
     }
 
     onBlur() {
@@ -167,15 +178,22 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
     }
 
     setDisabled() {
-        if (this.disabled === '' || this.isDisabled) {
+        if (this.disabled === '') {
             this.term.disable();
             if (!isNullOrUndefined(this.formControl))
                 this.formControl.disable();
         }
     }
 
-    subscribeToResults(observable: Observable<string>) {
-        observable.subscribe();
+    setDisabledState(isDisabled: boolean) {
+        this._log.debug(`DnInputComponent formControl'a term disable edildi.(setDisabledState) status : ${isDisabled}`,
+            this.formControlName);
+        if (isDisabled) {
+            this.term.disable();
+        } else {
+            this.term.enable();
+        }
+
     }
 
     writeValue(value: any) {
@@ -216,17 +234,8 @@ export class DnInputComponent implements ControlValueAccessor, OnInit {
             placeholder: 'dd/mm/yyyy hh:mm',
             separator: '/',
             alias: 'dd/mm/yyyy',
-            onincomplete: onincomplete,
+            onincomplete,
             showMaskOnHover: false
         };
     }
-
-
-    private subscribeToChangesAndLoadDataFromObservable() {
-        const observable = this.term.valueChanges
-            .debounceTime(100)
-            .distinctUntilChanged();
-        this.subscribeToResults(observable);
-    }
 }
-

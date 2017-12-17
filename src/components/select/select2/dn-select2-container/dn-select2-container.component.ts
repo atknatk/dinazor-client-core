@@ -1,21 +1,12 @@
-import {
-    Attribute,
-    Component,
-    ElementRef,
-    EventEmitter,
-    forwardRef,
-    Input,
-    OnInit,
-    Output,
-    ViewChild
-} from '@angular/core';
+import { Attribute, Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { DnLoggerService } from '../../../../services/log/logger.service';
 import { isNullOrUndefined } from '../../../../utils/check';
+import { noop } from '../../../../utils/common';
 import { DnSelect2Item } from '../dn-select2-item';
 import { DnSelect2Component } from '../dn-select2.component';
 import { DnSelect2Service } from '../dn-select2.service';
-import { noop } from '../../../../utils/common';
 
 /**
  * Created by cabbar on 15.05.2017.
@@ -99,7 +90,7 @@ export class DnSelect2ContainerComponent implements ControlValueAccessor, OnInit
 
     constructor(@Attribute('formControlName') _formControlName,
                 @Attribute('disabled') private disabled,
-                private _el: ElementRef) {
+                private _log: DnLoggerService) {
         this.formControlName = _formControlName;
         if (isNullOrUndefined(this.serviceUrl)) this.serviceUrl = _formControlName;
     }
@@ -147,14 +138,19 @@ export class DnSelect2ContainerComponent implements ControlValueAccessor, OnInit
     }
 
     ngOnInit(): void {
+        this._log.debug('DnSelect2ContainerComponent yükleniyor.(ngOnInit)', this.formControlName);
+
         this.isDisabled = this.disabled === '';
         if (this.form) {
             this.control = this.form.controls[this.formControlName] as FormControl;
             if (isNullOrUndefined(this.control)) {
+                this._log.debug(`DnSelect2ContainerComponent forma control ekleniyor.(ngOnInit)`, this.formControlName);
                 this.form.addControl(this.formControlName, new FormControl(null));
                 this.control = this.form.controls[this.formControlName] as FormControl;
+                if (this.control.disabled) this.control.disable();
+            } else {
+                if (this.isDisabled) this.control.disable();
             }
-            if (this.isDisabled) this.control.disable();
             // this.initializeValidationData();
             // this.initValidation();
         }
@@ -184,29 +180,10 @@ export class DnSelect2ContainerComponent implements ControlValueAccessor, OnInit
         this.onTouchedCallback = fn;
     }
 
-    subscribeToResults(observable: Observable<string>) {
-        observable.subscribe(item => {
-            if (!this.form) {
-                return;
-            }
-            const form = this.form;
-            for (const field in this.formErrors) {
-                if (this.formErrors.hasOwnProperty(field)) {
-                    this.formErrors[field] = '';
-                    const control = form.get(field);
-
-                    if (control && control.dirty && !control.valid) {
-                        const messages = this.validationMessages[field];
-                        for (const key in control.errors) {
-                            if (control.errors.hasOwnProperty(key)) {
-                                this.formErrors[field] += messages[key] + ' ';
-                            }
-                        }
-                    }
-                }
-
-            }
-        });
+    setDisabledState(isDisabled: boolean): void {
+        this._log.debug(`DnSelect2ContainerComponent setDisabledState status: ${isDisabled}.(setDisabledState)`,
+            this.formControlName);
+        this.isDisabled = isDisabled;
     }
 
     writeValue(value: any) {
@@ -223,37 +200,4 @@ export class DnSelect2ContainerComponent implements ControlValueAccessor, OnInit
             this.inputCss = css.join(' ');
         }
     }
-
-    /*private css(validators: DnQuestionValidatorBase[]) {
-        let css: string[] = [];
-        validators.forEach(validator => {
-            if (validator instanceof DnQuestionRequiredValidator) {
-                if (css.indexOf('dn-reqiured') == -1) {
-                    css.push('dn-reqiured');
-                }
-            }
-        });
-        if (this.inputCss) {
-            this.inputCss += ' ' + css.join(' ');
-        } else {
-            this.inputCss = css.join(' ');
-        }
-    }*/
-    /*  private initValidation() {
-          if (this.validators && this.validators.length > 0 && !isNullOrUndefined(this.control)) {
-              this.form.controls[this.formControlName].setValidators(this.getValidatorForm(this.validators));
-              this.css(this.validators);
-              this.subscribeToChangesAndLoadDataFromObservable();
-          }
-      }
-
-      private subscribeToChangesAndLoadDataFromObservable() {
-          if (this.control) {
-              let observable = this.control.valueChanges
-                  .debounceTime(100)
-                  .distinctUntilChanged();
-              this.subscribeToResults(observable);
-
-          }
-      }*/
 }

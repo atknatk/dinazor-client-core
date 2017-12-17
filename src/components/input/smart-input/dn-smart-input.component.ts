@@ -146,7 +146,7 @@ export class DnSmartInputComponent implements ControlValueAccessor, OnInit {
             this.form.addControl(this.formControlName, new FormControl(null));
         }
         this.formControl = this.form.get(this.formControlName);
-
+        if (this.formControl.disabled) this.term.disable();
     }
 
     onBlur() {

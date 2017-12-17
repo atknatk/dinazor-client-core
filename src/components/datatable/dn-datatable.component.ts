@@ -128,7 +128,7 @@ export class DnDatatableComponent implements OnInit {
                 const danger = this.el.nativeElement.querySelectorAll('button.btn-danger');
                 for (let i = 0; i < danger.length; i++) {
                     const item = danger[i];
-                    item.addEventListener('click', this.actionEdit.bind(this));
+                    item.addEventListener('click', this.actionDelete.bind(this));
                 }
             },
             fnHeaderCallback: (nHead, aData, iStart, iEnd, aiDisplay) => {

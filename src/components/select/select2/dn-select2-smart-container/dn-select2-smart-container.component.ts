@@ -7,15 +7,16 @@ import {
     Input,
     OnInit,
     Output,
-    ViewChild, ViewEncapsulation
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { isNullOrUndefined } from '../../../../utils/check';
+import { noop } from '../../../../utils/common';
 import { DnSelect2Item } from '../dn-select2-item';
 import { DnSelect2Component } from '../dn-select2.component';
 import { DnSelect2Service } from '../dn-select2.service';
-import { noop } from '../../../../utils/common';
 
 /**
  * Created by cabbar on 15.05.2017.
@@ -64,11 +65,9 @@ declare let $: any;
             border-style: solid !important;
         }
 
-
         .dn-select2-smart-container .select2-input {
             margin-top: 0 !important;
         }
-
 
         .dn-select2-smart-container input {
             height: 28px;
@@ -76,8 +75,7 @@ declare let $: any;
 
         }
 
-
-        .dn-select2-smart-container .simple-selection input{
+        .dn-select2-smart-container .simple-selection input {
             left: 2px !important;
             background: #fff !important;
             color: #404040;
@@ -93,7 +91,6 @@ declare let $: any;
             line-height: 1.5 !important;;
         }
 
-
         .dn-select2-smart-container .select2-results-container {
             margin-top: -1px !important;
             overflow-x: hidden;
@@ -104,20 +101,17 @@ declare let $: any;
             overflow-x: hidden;
         }
 
-
-
         .dn-select2-smart-container .select2-container .search-focused {
             border-color: #3276B1 !important;;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;;
         }
 
-
         .dn-select2-smart-container a {
             color: #404040;
         }
 
-        .dn-select2-smart-container  .select2-selected {
+        .dn-select2-smart-container .select2-selected {
             left: 2px !important;
             background: #fff !important;
             color: #404040;
@@ -130,7 +124,7 @@ declare let $: any;
             line-height: 1.5 !important;;
         }
 
-        .dn-select2-smart-container  .simple-selection .select2-selected{
+        .dn-select2-smart-container .simple-selection .select2-selected {
             padding-top: 4px !important;
         }
     `],
@@ -228,11 +222,17 @@ export class DnSelect2SmartContainerComponent implements ControlValueAccessor, O
             if (isNullOrUndefined(this.control)) {
                 this.form.addControl(this.formControlName, new FormControl(null));
                 this.control = this.form.controls[this.formControlName] as FormControl;
+                if (this.control.disabled) this.control.disable();
+            } else {
+                if (this.isDisabled) this.control.disable();
             }
-            if (this.isDisabled) this.control.disable();
             // this.initializeValidationData();
             // this.initValidation();
         }
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.isDisabled = isDisabled;
     }
 
     onBlur() {
